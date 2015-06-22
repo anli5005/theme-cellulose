@@ -30,8 +30,8 @@ module.exports = function(grunt) {
 					expand: true,
 					flatten: true,
 					filter: "isFile",
-					src: "fonts/material-design-icons/**",
-					dest: "dist/theme-cellulose/fonts/material-design-icons/"
+					src: "fonts/material-icons/**",
+					dest: "dist/theme-cellulose/fonts/material-icons/"
 				},
 				{
 					expand: true,
