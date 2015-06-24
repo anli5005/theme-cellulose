@@ -1,17 +1,19 @@
 module.exports = function(grunt) {
 	
-	grunt.initConfig({
+	grunt.initConfig({ // TODO: Replace "$." with "jQuery." in materialize.js
 		clean: {
 			dist: ["dist"],
 			css: ["dist/theme-cellulose/css", "dist/theme-cellulose/style.css"],
 			js: ["dist/theme-cellulose/js"],
-			fonts: ["dist/theme-cellulose/fonts"]
 		},
 		copy: {
 			php: {
-				files: {
-					
-				}
+				files: [{
+					expand: true,
+					flatten: true,
+					src: "php/**",
+					dest: "dist/theme-cellulose/"
+				}]
 			},
 			materialize: {
 				files: {
@@ -20,26 +22,10 @@ module.exports = function(grunt) {
 				options: {
 					process: function(content, path) {
 						var noIcons = content.replace(/.*mdi.*\{[^\}]*\}\n?\n?/g, "").replace("/* Start Icons */\n", "");
-						var noIconFont = noIcons.replace(/@font-face.*\{(.|\n)*font-family:.*"Material-Design-Icons";[^}]+\}[^}]+\} }[^}]+\} \}\n*/, "");
-						return noIconFont.replace("font/", "fonts/");
+						var noIconFont = noIcons.replace(/@font-face(.|\n)*font-family:.*"Material-Design-Icons";[^}]+\}[^}]+\} }[^}]+\} \}\n*/, "");
+						return noIconFont.replace(/@font-face(.|\n)*font-family:.*"Roboto";[^}]+\} \}\n*/, "").replace("fonts/", "font/");
 					}
 				}
-			},
-			fonts: {
-				files: [{
-					expand: true,
-					flatten: true,
-					filter: "isFile",
-					src: "fonts/material-icons/**",
-					dest: "dist/theme-cellulose/fonts/material-icons/"
-				},
-				{
-					expand: true,
-					flatten: true,
-					filter: "isFile",
-					src: "fonts/roboto/**",
-					dest: "dist/theme-cellulose/fonts/roboto/"
-				}]
 			}
 		},
 		cssmin: {
@@ -56,7 +42,12 @@ module.exports = function(grunt) {
 			}
 		},
 		less: {
-			css: { // TODO: Add Autoprefixer
+			css: {
+				options: {
+					plugins: [
+						new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
+					]
+				},
 				files: {
 					"dist/theme-cellulose/style.css": "less/style.less"
 				}
@@ -88,8 +79,7 @@ module.exports = function(grunt) {
 	
 	grunt.registerTask("css", ["clean:css", "copy:materialize", "cssmin:materialize", "less:css", "cssbeautifier:css"]);
 	grunt.registerTask("js", ["clean:js", "concat:js", "uglify:js"]);
-	grunt.registerTask("fonts", ["clean:fonts", "copy:fonts"]);
-	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js", "copy:fonts"]);
+	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js"]);
 	
 	grunt.registerTask("default", ["dist"]);
 	
