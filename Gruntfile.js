@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 	
-	grunt.initConfig({ // TODO: Replace "$." with "jQuery." in materialize.js
+	grunt.initConfig({
 		clean: {
 			dist: ["dist"],
 			css: ["dist/theme-cellulose/css", "dist/theme-cellulose/style.css"],
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 					process: function(content, path) {
 						var noIcons = content.replace(/.*mdi.*\{[^\}]*\}\n?\n?/g, "").replace("/* Start Icons */\n", "");
 						var noIconFont = noIcons.replace(/@font-face(.|\n)*font-family:.*"Material-Design-Icons";[^}]+\}[^}]+\} }[^}]+\} \}\n*/, "");
-						return noIconFont.replace(/@font-face(.|\n)*font-family:.*"Roboto";[^}]+\} \}\n*/, "").replace("fonts/", "font/");
+						return noIconFont.replace(/@font-face(.|\n)*font-family:.*"Roboto";[^}]+\}\n*/g, "");
 					}
 				}
 			}
@@ -37,24 +37,40 @@ module.exports = function(grunt) {
 		},
 		concat: {
 			js: {
-				src: ["js/materialize.js"],
-				dest: "dist/theme-cellulose/js/scripts.js"
+				src: ["js/waves.js"],
+				dest: "dist/theme-cellulose/js/scripts.js",
 			}
 		},
-		less: {
+		sass: {
 			css: {
 				options: {
-					plugins: [
-						new (require('less-plugin-autoprefix'))({browsers: ["last 2 versions"]})
-					]
+					sourcemap: "none",
+					style: "expanded"
 				},
 				files: {
-					"dist/theme-cellulose/style.css": "less/style.less"
+					"dist/theme-cellulose/style.css": "scss/style.scss"
 				}
 			}
 		},
-		cssbeautifier: {
+		replace: {
 			css: {
+				src: ["dist/theme-cellulose/style.css"],
+				overwrite: true,
+				replacements: [{
+					from: "/* NEWLINE */\n",
+					to: "\n"
+				},
+				{
+					from: "/* NEWLINE (2) */\n",
+					to: "\n\n"
+				}]
+			}
+		},
+		autoprefixer: {
+			css: {
+				options: {
+					browsers: ["last 2 versions"]
+				},
 				files: {
 					"dist/theme-cellulose/style.css": "dist/theme-cellulose/style.css"
 				}
@@ -73,11 +89,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-copy");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
 	grunt.loadNpmTasks("grunt-contrib-concat");
-	grunt.loadNpmTasks("grunt-contrib-less");
-	grunt.loadNpmTasks("grunt-cssbeautifier");
+	grunt.loadNpmTasks("grunt-contrib-sass");
+	grunt.loadNpmTasks("grunt-text-replace");
+	grunt.loadNpmTasks("grunt-autoprefixer");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	
-	grunt.registerTask("css", ["clean:css", "copy:materialize", "cssmin:materialize", "less:css", "cssbeautifier:css"]);
+	grunt.registerTask("css", ["clean:css", "copy:materialize", "cssmin:materialize", "sass:css", "replace:css", "autoprefixer:css"]);
 	grunt.registerTask("js", ["clean:js", "concat:js", "uglify:js"]);
 	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js"]);
 	

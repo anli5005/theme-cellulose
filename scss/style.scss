@@ -5,7 +5,7 @@
  Text Domain: tcellulose
  */
 
-@import (inline, multiple) "section-divider.txt";
+/* NEWLINE (2) */
 
 /**
  * Main Stylesheet
@@ -13,6 +13,7 @@
  */
 // TODO: Table of Contents
 
-@import (inline, multiple) "section-divider.txt";
+/* NEWLINE (2) */
 
-
+@import "_reset";
+@import "_header";
