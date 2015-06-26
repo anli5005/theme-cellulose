@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			dist: ["dist"],
-			css: ["dist/theme-cellulose/css", "dist/theme-cellulose/style.css"],
+			css: ["dist/theme-cellulose/style.css", "dist/theme-cellulose/style.min.css"],
 			js: ["dist/theme-cellulose/js"],
 		},
 		copy: {
@@ -14,25 +14,6 @@ module.exports = function(grunt) {
 					src: "php/**",
 					dest: "dist/theme-cellulose/"
 				}]
-			},
-			materialize: {
-				files: {
-					"dist/theme-cellulose/css/materialize.css": "materialize/materialize.css",
-				},
-				options: {
-					process: function(content, path) {
-						var noIcons = content.replace(/.*mdi.*\{[^\}]*\}\n?\n?/g, "").replace("/* Start Icons */\n", "");
-						var noIconFont = noIcons.replace(/@font-face(.|\n)*font-family:.*"Material-Design-Icons";[^}]+\}[^}]+\} }[^}]+\} \}\n*/, "");
-						return noIconFont.replace(/@font-face(.|\n)*font-family:.*"Roboto";[^}]+\}\n*/g, "");
-					}
-				}
-			}
-		},
-		cssmin: {
-			materialize: {
-				files: {
-					"dist/theme-cellulose/css/materialize.min.css": "dist/theme-cellulose/css/materialize.css"
-				}
 			}
 		},
 		concat: {
@@ -44,7 +25,7 @@ module.exports = function(grunt) {
 		sass: {
 			css: {
 				options: {
-					sourcemap: "none",
+					sourcemap: "auto",
 					style: "expanded"
 				},
 				files: {
@@ -63,6 +44,14 @@ module.exports = function(grunt) {
 				{
 					from: "/* NEWLINE (2) */\n",
 					to: "\n\n"
+				},
+				{
+					from: /\/\*{3}[^\*]+\*+\/\n/g,
+					to: ""
+				},
+				{
+					from: /\/\* Progress Bar \*\/\n/,
+					to: ""
 				}]
 			}
 		},
@@ -73,6 +62,13 @@ module.exports = function(grunt) {
 				},
 				files: {
 					"dist/theme-cellulose/style.css": "dist/theme-cellulose/style.css"
+				}
+			}
+		},
+		cssmin: {
+			css: {
+				files: {
+					"dist/theme-cellulose/style.min.css": "dist/theme-cellulose/style.css"
 				}
 			}
 		},
@@ -94,7 +90,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-autoprefixer");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	
-	grunt.registerTask("css", ["clean:css", "copy:materialize", "cssmin:materialize", "sass:css", "replace:css", "autoprefixer:css"]);
+	grunt.registerTask("css", ["clean:css", "sass:css", "replace:css", "autoprefixer:css", "cssmin:css"]);
 	grunt.registerTask("js", ["clean:js", "concat:js", "uglify:js"]);
 	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js"]);
 	

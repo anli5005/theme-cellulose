@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /*
  Theme Name: Cellulose
  Author: anli5005
@@ -5,15 +7,56 @@
  Text Domain: tcellulose
  */
 
+// Variables and mixins
+@import "materialize/prefixer";
+@import "materialize/mixins";
+@import "materialize/color";
+@import "materialize/variables";
+
+@import "mixins";
+@import "variables";
+
 /* NEWLINE (2) */
 
 /**
  * Main Stylesheet
  * Table of Contents
  */
-// TODO: Table of Contents
+// TODO: Table of Contents and Section Headers in this file
 
 /* NEWLINE (2) */
 
-@import "_reset";
-@import "_header";
+@import "reset";
+@import "materialize/normalize";
+/* NEWLINE */
+
+@import "materialize/global";
+/* NEWLINE */
+
+@import "color-classes";
+
+@import "header";
+
+// TODO: Actually organize this thing
+@import "materialize/grid";
+@import "materialize/navbar";
+@import "materialize/roboto";
+@import "materialize/typography";
+@import "materialize/cards";
+@import "materialize/toast";
+@import "materialize/tabs";
+@import "materialize/tooltip";
+@import "materialize/buttons";
+@import "materialize/dropdown";
+@import "materialize/waves";
+@import "materialize/modal";
+@import "materialize/collapsible";
+@import "materialize/materialbox";
+@import "materialize/form";
+@import "materialize/table_of_contents";
+@import "materialize/sideNav";
+@import "materialize/preloader";
+@import "materialize/slider";
+@import "materialize/date_picker/default.scss";
+@import "materialize/date_picker/default.date.scss";
+@import "materialize/date_picker/default.time.scss";
