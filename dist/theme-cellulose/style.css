@@ -3254,13 +3254,6 @@ span.badge.new:after {
   color: transparent !important;
 }
 
-.site-navigation,
-.site-navigation .tabs {
-  background-color: inherit;
-  box-shadow: none;
-}
-
-
 .container {
   margin: 0 auto;
   max-width: 1280px;
@@ -3568,6 +3561,108 @@ span.badge.new:after {
   }
 }
 
+.site-header {
+  display: block;
+  width: 100%;
+}
+
+.site-title {
+  font-size: 20pt;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-navigation,
+.site-navigation .tabs {
+  margin-bottom: 0;
+  background-color: inherit;
+  box-shadow: none;
+  height: 48px;
+}
+
+.site-navigation,
+.site-navigation .tabs,
+.site-navigation .tabs li {
+  width: initial;
+}
+
+.site-navigation .tabs li.active {
+  background-color: inherit;
+  border-bottom: 2px solid #2979FF;
+}
+
+@media only screen and (orientation: portrait) and (min-width: 841px), only screen and (orientation: landscape) and (min-width: 961px) {
+  .site-header {
+    height: 64px;
+    padding: 0 24px 0 24px;
+  }
+
+  .site-title {
+    float: left;
+    width: 60%;
+    margin-right: 0;
+    height: 64px;
+    line-height: 64px;
+  }
+
+  .site-navigation {
+    float: right;
+  }
+
+  .site-navigation,
+  .site-navigation .tabs,
+  .site-navigation .tabs li {
+    height: 100%;
+  }
+
+  .site-navigation .tabs li {
+    line-height: 64px;
+  }
+}
+@media only screen and (orientation: portrait) and (max-width: 840px), only screen and (orientation: landscape) and (max-width: 960px) {
+  .site-header {
+    padding: 0 0 0 16px;
+  }
+
+  .site-title {
+    width: 100%;
+    padding-right: 16px;
+  }
+
+  .site-navigation {
+    height: 48px;
+  }
+
+  .site-navigation .tabs li {
+    line-height: 48px;
+  }
+}
+@media only screen and (orientation: portrait) and (max-width: 840px) {
+  .site-header {
+    height: 104px;
+  }
+
+  .site-title {
+    height: 56px;
+    line-height: 56px;
+  }
+}
+@media only screen and (orientation: landscape) and (max-width: 960px) {
+  .site-header {
+    height: 96px;
+  }
+
+  .site-title {
+    height: 48px;
+    line-height: 48px;
+  }
+}
+
 nav {
   color: #fff;
   background-color: #ee6e73;
@@ -3693,31 +3788,6 @@ nav .input-field label.active {
   .navbar-fixed {
     height: 64px;
   }
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Thin.woff2") format("woff2"), url("../font/roboto/Roboto-Thin.woff") format("woff"), url("../font/roboto/Roboto-Thin.ttf") format("truetype");
-  font-weight: 200;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Light.woff2") format("woff2"), url("../font/roboto/Roboto-Light.woff") format("woff"), url("../font/roboto/Roboto-Light.ttf") format("truetype");
-  font-weight: 300;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Regular.woff2") format("woff2"), url("../font/roboto/Roboto-Regular.woff") format("woff"), url("../font/roboto/Roboto-Regular.ttf") format("truetype");
-  font-weight: 400;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Medium.woff2") format("woff2"), url("../font/roboto/Roboto-Medium.woff") format("woff"), url("../font/roboto/Roboto-Medium.ttf") format("truetype");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url("../font/roboto/Roboto-Bold.woff2") format("woff2"), url("../font/roboto/Roboto-Bold.woff") format("woff"), url("../font/roboto/Roboto-Bold.ttf") format("truetype");
-  font-weight: 700;
 }
 a {
   text-decoration: none;

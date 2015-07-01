@@ -12,13 +12,41 @@ module.exports = function(grunt) {
 					expand: true,
 					flatten: true,
 					src: "php/**",
-					dest: "dist/theme-cellulose/"
+					dest: "dist/theme-cellulose/",
+					filter: "isFile"
 				}]
 			}
 		},
 		concat: {
 			js: {
-				src: ["js/waves.js"],
+				src: [
+              	"js/materialize/jquery.easing.1.3.js",
+              	"js/materialize/animation.js",
+              	"js/materialize/velocity.min.js",
+              	"js/materialize/hammer.min.js",
+              	"js/materialize/jquery.hammer.js",
+              	"js/materialize/global.js",
+       	        "js/materialize/collapsible.js",
+      	        "js/materialize/dropdown.js",
+				"js/materialize/leanModal.js",
+      	        "js/materialize/materialbox.js",
+              	"js/materialize/parallax.js",
+              	"js/materialize/tooltip.js",
+              	"js/materialize/waves.js",
+              	"js/materialize/toasts.js",
+                "js/materialize/sideNav.js",
+                "js/materialize/scrollspy.js",
+                "js/materialize/forms.js",
+                "js/materialize/slider.js",
+                "js/materialize/cards.js",
+                "js/materialize/pushpin.js",
+                "js/materialize/buttons.js",
+                "js/materialize/transitions.js",
+                "js/materialize/scrollFire.js",
+                "js/materialize/date_picker/picker.js",
+                "js/materialize/date_picker/picker.date.js",
+                "js/materialize/character_counter.js"
+             ],
 				dest: "dist/theme-cellulose/js/scripts.js",
 			}
 		},

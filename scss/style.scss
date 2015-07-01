@@ -35,12 +35,12 @@
 
 @import "color-classes";
 
+@import "materialize/grid";
+
 @import "header";
 
 // TODO: Actually organize this thing
-@import "materialize/grid";
 @import "materialize/navbar";
-@import "materialize/roboto";
 @import "materialize/typography";
 @import "materialize/cards";
 @import "materialize/toast";
