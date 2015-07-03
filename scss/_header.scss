@@ -1,6 +1,14 @@
 .site-header {
   display: block;
   width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  
+  background-color: $primary-color;
+  color: color( "shades", "black" );
+  
+  @extend .z-depth-4;
 }
 
 .site-title {
@@ -8,11 +16,14 @@
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
-  vertical-align: middle;
   
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  
+  a {
+    color: color( "shades", "black" );
+  }
 }
 
 .site-navigation,
@@ -30,9 +41,20 @@
   width: initial;
 }
 
-.site-navigation .tabs li.active {
+.site-navigation .tabs li a,
+.site-navigation .tabs li a:hover {
+  color: color( "shades", "black" );
+}
+
+.site-navigation .tabs li.current-menu-item a,
+.site-navigation .tabs li.current-menu-item a:active {
   background-color: inherit;
-  border-bottom: 2px solid color("blue", "accent-3");
+  color: $secondary-color;
+  border-bottom: 2px solid $secondary-color;
+}
+
+body.admin-bar .site-header {
+  top: 32px;
 }
 
 @media only screen and (orientation: portrait) and (min-width: 841px), only screen and (orientation: landscape) and (min-width: 961px) {
@@ -61,6 +83,38 @@
   
   .site-navigation .tabs li {
     line-height: 64px;
+  }
+  
+  .site-header.expand.expanded {
+    height: initial;
+    position: relative;
+    top: 0;
+    padding-bottom: 1.424rem;
+  }
+  
+  .site-header.expand.expanded .site-title,
+  .site-header.expand.expanded .site-tagline {
+    width: 100%;
+  }
+  
+  .site-header.expand.expanded .page-title {
+    width: 60%;
+  }
+  
+  .site-header.expand.expanded .site-title {
+    float: none;
+  }
+  
+  .site-header.expand.expanded .site-navigation,
+  .site-header.expand.expanded .site-navigation .tabs,
+  .site-header.expand.expanded .site-navigation .tabs li {
+    height: 64px;
+  }
+  
+  .site-header.expand.expanded .site-navigation {
+    position: absolute;
+    right: 16px;
+    bottom: 0;
   }
 }
 

@@ -11,7 +11,23 @@ function tcellulose_enqueue_script() {
 	wp_enqueue_script( "cellulose-js", get_template_directory_uri() . "/js/scripts.min.js", array( "jquery" ) );
 }
 
+function tcellulose_register_menus() {
+	register_nav_menu( "navigation", __( "Navigation", "tcellulose" ) );
+}
+
+function tcellulose_navbar_item_classes( $classes, $item, $args, $depth ) {
+	if ( ( $args->theme_location == "navigation" ) && ( $depth <= 0 ) ) {
+		$classes[] = 'tab';
+	}
+	
+	return $classes;
+}
+
+add_filter( "nav_menu_css_class" , "tcellulose_navbar_item_classes", 10, 4);
+
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_styles" );
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_script" );
+
+add_action( "after_setup_theme", "tcellulose_register_menus" );
 
 ?>
