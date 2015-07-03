@@ -3614,6 +3614,17 @@ body.admin-bar .site-header {
   top: 32px;
 }
 
+.site-header.expand.expanded {
+  height: initial;
+  position: relative;
+  top: 0;
+}
+
+.site-header.expand.expanded .site-title,
+.site-header.expand.expanded .site-tagline {
+  width: 100%;
+}
+
 @media only screen and (orientation: portrait) and (min-width: 841px), only screen and (orientation: landscape) and (min-width: 961px) {
   .site-header {
     height: 64px;
@@ -3643,15 +3654,7 @@ body.admin-bar .site-header {
   }
 
   .site-header.expand.expanded {
-    height: initial;
-    position: relative;
-    top: 0;
     padding-bottom: 1.424rem;
-  }
-
-  .site-header.expand.expanded .site-title,
-  .site-header.expand.expanded .site-tagline {
-    width: 100%;
   }
 
   .site-header.expand.expanded .page-title {
@@ -3701,6 +3704,12 @@ body.admin-bar .site-header {
     height: 56px;
     line-height: 56px;
   }
+
+  .site-header.expand.expanded .site-navigation,
+  .site-header.expand.expanded .site-navigation .tabs,
+  .site-header.expand.expanded .site-navigation .tabs li {
+    height: 56px;
+  }
 }
 @media only screen and (orientation: landscape) and (max-width: 960px) {
   .site-header {
@@ -3710,6 +3719,12 @@ body.admin-bar .site-header {
   .site-title {
     height: 48px;
     line-height: 48px;
+  }
+
+  .site-header.expand.expanded .site-navigation,
+  .site-header.expand.expanded .site-navigation .tabs,
+  .site-header.expand.expanded .site-navigation .tabs li {
+    height: 48px;
   }
 }
 
