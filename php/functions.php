@@ -15,9 +15,20 @@ function tcellulose_register_menus() {
 	register_nav_menu( "navigation", __( "Navigation", "tcellulose" ) );
 }
 
+function tcellulose_navigation_fallback( $args ) {
+	$args[ "show_home" ] = 1;
+	wp_page_menu( $args );
+}
+
+function tcellulose_page_menu_filter( $menu ) {
+	return preg_replace( "/<(div[^>]*|\/div)>\n?/i", "", $menu );
+}
+
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_styles" );
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_script" );
 
 add_action( "after_setup_theme", "tcellulose_register_menus" );
+
+add_filter( "wp_page_menu", "tcellulose_page_menu_filter", 10, 1 );
 
 ?>

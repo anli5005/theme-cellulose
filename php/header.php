@@ -38,14 +38,14 @@ $tcellulose_header_expanded = ( is_front_page() || is_page() || is_archive() );
 			<nav class="site-navigation">
 				<?php
 				
-				// FIXME: Problems with custom links: admin bar is hidden upon clicking.
-				// TODO:  Add support for submenus
+				// TODO: Add support for submenus
 				
 				wp_nav_menu( array(
 				
 				"theme_location" => "navigation",
 				"depth" => -1,
 				"container" => false,
+				"fallback_cb" => "tcellulose_navigation_fallback"
 				
 				) );
 				
