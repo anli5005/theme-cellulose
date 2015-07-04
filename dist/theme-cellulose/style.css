@@ -3584,28 +3584,49 @@ span.badge.new:after {
   color: #000000;
 }
 
-.site-navigation,
-.site-navigation .tabs {
-  margin-bottom: 0;
-  background-color: inherit;
-  box-shadow: none;
-  height: 48px;
+.site-navigation {
+  overflow: scroll;
 }
 
-.site-navigation,
-.site-navigation .tabs,
-.site-navigation .tabs li {
-  width: initial;
+.site-navigation .menu {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 }
-
-.site-navigation .tabs li a,
-.site-navigation .tabs li a:hover {
+.site-navigation .menu > li {
+  white-space: nowrap;
+  display: inline-block;
+  float: none;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+.site-navigation .menu > li > a {
+  color: #000000;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.site-navigation .menu > li > a:hover {
   color: #000000;
 }
 
-.site-navigation .tabs li.current-menu-item a,
-.site-navigation .tabs li.current-menu-item a:active {
+.site-navigation,
+.site-navigation .menu {
+  margin-bottom: 0;
   background-color: inherit;
+  box-shadow: none;
+}
+
+.site-navigation .menu,
+.site-navigation .menu > li {
+  margin-bottom: 0;
+  background-color: inherit;
+  box-shadow: none;
+}
+
+.site-navigation .menu > li.current-menu-item > a,
+.site-navigation .menu > li.current-menu-item > a:hover {
   color: #2979FF;
   border-bottom: 2px solid #2979FF;
 }
@@ -3640,16 +3661,21 @@ body.admin-bar .site-header {
   }
 
   .site-navigation {
+    width: 40%;
     float: right;
   }
 
+  .site-navigation .menu {
+    width: 100%;
+  }
+
   .site-navigation,
-  .site-navigation .tabs,
-  .site-navigation .tabs li {
+  .site-navigation .menu,
+  .site-navigation .menu > li {
     height: 100%;
   }
 
-  .site-navigation .tabs li {
+  .site-navigation .menu > li {
     line-height: 64px;
   }
 
@@ -3666,8 +3692,8 @@ body.admin-bar .site-header {
   }
 
   .site-header.expand.expanded .site-navigation,
-  .site-header.expand.expanded .site-navigation .tabs,
-  .site-header.expand.expanded .site-navigation .tabs li {
+  .site-header.expand.expanded .site-navigation .menu,
+  .site-header.expand.expanded .site-navigation .menu > li {
     height: 64px;
   }
 
@@ -3679,7 +3705,7 @@ body.admin-bar .site-header {
 }
 @media only screen and (orientation: portrait) and (max-width: 840px), only screen and (orientation: landscape) and (max-width: 960px) {
   .site-header {
-    padding: 0 0 0 16px;
+    padding: 0;
   }
 
   .site-title {
@@ -3687,12 +3713,29 @@ body.admin-bar .site-header {
     padding-right: 16px;
   }
 
-  .site-navigation {
-    height: 48px;
+  .site-title,
+  .site-tagline,
+  .page-title,
+  .site-navigation .menu {
+    padding-left: 16px;
   }
 
-  .site-navigation .tabs li {
+  .site-navigation,
+  .site-navigation .menu {
+    width: 100%;
+  }
+
+  .site-navigation,
+  .site-navigation .menu,
+  .site-navigation .menu > li,
+  .site-navigation .menu > li > a {
+    height: 48px;
     line-height: 48px;
+  }
+
+  .site-header.expanded.expand .site-title {
+    height: 56px;
+    line-height: 56px;
   }
 }
 @media only screen and (orientation: portrait) and (max-width: 840px) {
@@ -3704,12 +3747,6 @@ body.admin-bar .site-header {
     height: 56px;
     line-height: 56px;
   }
-
-  .site-header.expand.expanded .site-navigation,
-  .site-header.expand.expanded .site-navigation .tabs,
-  .site-header.expand.expanded .site-navigation .tabs li {
-    height: 56px;
-  }
 }
 @media only screen and (orientation: landscape) and (max-width: 960px) {
   .site-header {
@@ -3720,11 +3757,10 @@ body.admin-bar .site-header {
     height: 48px;
     line-height: 48px;
   }
-
-  .site-header.expand.expanded .site-navigation,
-  .site-header.expand.expanded .site-navigation .tabs,
-  .site-header.expand.expanded .site-navigation .tabs li {
-    height: 48px;
+}
+@media only screen and (max-width: 782px) {
+  body.admin-bar .site-header {
+    top: 46px;
   }
 }
 

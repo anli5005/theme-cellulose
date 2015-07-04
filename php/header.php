@@ -46,7 +46,6 @@ $tcellulose_header_expanded = ( is_front_page() || is_page() || is_archive() );
 				"theme_location" => "navigation",
 				"depth" => -1,
 				"container" => false,
-				"menu_class" => "tabs menu"
 				
 				) );
 				
