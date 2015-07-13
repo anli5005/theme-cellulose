@@ -31,20 +31,23 @@
 /* NEWLINE */
 
 @import "materialize/global";
+@import "materialize/typography";
+@import "global";
 /* NEWLINE */
 
 @import "color-classes";
 
 @import "materialize/grid";
 
+@import "materialize/navbar";
+@import "materialize/tabs";
 @import "header";
 
+@import "content";
+
 // TODO: Actually organize this thing
-@import "materialize/navbar";
-@import "materialize/typography";
 @import "materialize/cards";
 @import "materialize/toast";
-@import "materialize/tabs"; // TODO: Put before @import "header";
 @import "materialize/tooltip";
 @import "materialize/buttons";
 @import "materialize/dropdown";

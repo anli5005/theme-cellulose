@@ -1,8 +1,3 @@
-<?php
-
-$tcellulose_header_expanded = ( is_front_page() || is_page() || is_archive() );
-
-?>
 <!DOCTYPE html>
 <html>
 	
@@ -16,12 +11,12 @@ $tcellulose_header_expanded = ( is_front_page() || is_page() || is_archive() );
 		
 	</head>
 	
-	<body <?php echo( esc_attr( body_class() ) ); ?>>
+	<body <?php body_class(); ?>>
 		
-		<header class="site-header <?php echo( $tcellulose_header_expanded ? "expand expanded " : "" ); ?>">
+		<header class="site-header <?php echo( tcellulose_header_expanded() ? "expand expanded " : "" ); ?>">
 			
 			<h1 class="site-title"><a href="<?php echo( esc_url( home_url( "/", "relative" ) ) ); ?>"><?php echo( esc_html( get_bloginfo( "name" ) ) ); ?></a></h1>
-			<?php if ( $tcellulose_header_expanded ): ?>
+			<?php if ( tcellulose_header_expanded() ): ?>
 				<p class="site-tagline"><?php echo( esc_html( get_bloginfo( "description" ) ) ); ?></p>
 				
 				<h2 class="page-title"><?php
@@ -39,6 +34,7 @@ $tcellulose_header_expanded = ( is_front_page() || is_page() || is_archive() );
 				<?php
 				
 				// TODO: Add support for submenus
+				// TODO: Add pagination on tabs for desktop
 				
 				wp_nav_menu( array(
 				
