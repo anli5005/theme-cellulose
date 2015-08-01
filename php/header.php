@@ -23,8 +23,10 @@
 					
 					if ( is_page() ) {
 						echo( esc_html( get_the_title() ) );
-					} else if ( is_home() ) {
+					} elseif ( is_front_page() && is_home() )  {
 						_e( "Home", "tcellulose" );
+					} else {
+						echo( esc_html( wp_title( "", FALSE )  ) );
 					}
 					
 				?></h2>

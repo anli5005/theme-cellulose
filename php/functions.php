@@ -25,7 +25,7 @@ function tcellulose_page_menu_filter( $menu ) {
 }
 
 function tcellulose_header_expanded() {
-	return ( is_front_page() || is_page() || is_archive() );
+	return ( is_front_page() || is_page() || is_archive() || is_home() );
 }
 
 function tcellulose_add_body_classes( $classes ) {
@@ -35,10 +35,24 @@ function tcellulose_add_body_classes( $classes ) {
 	return $classes;
 }
 
+function tcellulose_register_widget_areas() {
+	register_sidebar( array(
+		'name' => __( 'Footer', 'tcellulose' ),
+		'id' => 'tcellulose-footer',
+		'description' => __( 'The widget area for the theme footer', 'tcellulose' ),
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+		'before_title' => '<h5 class="widget-title">',
+		'after_title' => '</h5>'
+	) );
+}
+
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_styles" );
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_script" );
 
 add_action( "after_setup_theme", "tcellulose_register_menus" );
+
+add_action( "widgets_init", 'tcellulose_register_widget_areas' );
 
 add_filter( "wp_page_menu", "tcellulose_page_menu_filter", 10, 1 );
 

@@ -1328,6 +1328,7 @@ body.expanded-header .main {
 }
 
 
+
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important;
 }
@@ -4236,6 +4237,13 @@ body.single .main p {
 
 article.page {
   margin-top: 4em;
+}
+
+
+.page-footer .widget {
+  display: inline-block;
+  vertical-align: top;
+  padding-right: 2em;
 }
 
 
