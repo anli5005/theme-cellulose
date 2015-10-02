@@ -280,14 +280,7 @@ Materialize.elementOrParentIsFixed = function(element) {
     return isFixed;
 };
 
-// Velocity has conflicts when loaded with jQuery, this will check for it
-var Vel;
-if ($) {
-  Vel = $.Velocity;
-}
-else {
-  Vel = Velocity;
-}
+var Vel = jQuery.Velocity;
 
 (function ($) {
   $.fn.collapsible = function(options) {

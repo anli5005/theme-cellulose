@@ -1119,12 +1119,12 @@ html {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, .page-title, h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.1;
 }
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+h1 a, h2 a, .page-title a, h3 a, h4 a, h5 a, h6 a {
   font-weight: inherit;
 }
 
@@ -1134,7 +1134,7 @@ h1 {
   margin: 2.1rem 0 1.68rem 0;
 }
 
-h2 {
+h2, .page-title {
   font-size: 3.56rem;
   line-height: 110%;
   margin: 1.78rem 0 1.424rem 0;
@@ -1316,8 +1316,15 @@ body {
   padding-bottom: 20px;
 }
 
-body.expanded-header .main {
-  padding-top: 10px;
+.main,
+.main-sidebar {
+  margin-top: 26px;
+}
+
+.row aside.main-sidebar {
+  border-radius: 4px;
+  background-color: #dddddd;
+  padding: 1em 1em 1em 1em;
 }
 
 .material-icons {
@@ -3489,23 +3496,23 @@ body.expanded-header .main {
   color: transparent !important;
 }
 
-.container, .main {
+.container {
   margin: 0 auto;
   max-width: 1280px;
   width: 90%;
 }
 
 @media only screen and (min-width: 601px) {
-  .container, .main {
+  .container {
     width: 85%;
   }
 }
 @media only screen and (min-width: 993px) {
-  .container, .main {
+  .container {
     width: 70%;
   }
 }
-.container .row, .main .row {
+.container .row {
   margin-left: -0.75rem;
   margin-right: -0.75rem;
 }
@@ -4055,6 +4062,12 @@ body.admin-bar .site-header {
   width: 100%;
 }
 
+.page-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media only screen and (orientation: portrait) and (min-width: 841px), only screen and (orientation: landscape) and (min-width: 961px) {
   .site-header {
     height: 64px;
@@ -4063,10 +4076,14 @@ body.admin-bar .site-header {
 
   .site-title {
     float: left;
-    width: 51.458980345%;
     margin-right: 0;
     height: 64px;
     line-height: 64px;
+  }
+
+  .site-title,
+  .page-title {
+    width: 51.458980345%;
   }
 
   .site-navigation {
@@ -4124,7 +4141,7 @@ body.admin-bar .site-header {
   }
 
   body {
-    padding-top: 90px;
+    padding-top: 64px;
   }
 }
 @media only screen and (orientation: portrait) and (max-width: 840px), only screen and (orientation: landscape) and (max-width: 960px) {
@@ -4175,10 +4192,6 @@ body.admin-bar .site-header {
     height: 56px;
     line-height: 56px;
   }
-
-  body {
-    padding-top: 120px;
-  }
 }
 @media only screen and (orientation: landscape) and (max-width: 960px) {
   .site-header {
@@ -4196,7 +4209,9 @@ body.admin-bar .site-header {
 }
 @media only screen and (max-width: 782px) {
   body.admin-bar .site-header {
-    top: 46px;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
   }
 }
 body.expanded-header {
@@ -4210,6 +4225,7 @@ body.single .main p {
 
 .main > article {
   margin-bottom: 4em;
+  clear: both;
 }
 
 .entry-title a {
@@ -4227,16 +4243,65 @@ body.single .main p {
   margin-bottom: 1em;
 }
 
+.entry-details a {
+  color: #0279b3;
+}
+
+.entry-details a:hover,
+.entry-details a:active,
+.entry-details a:focus {
+  text-decoration: underline;
+}
+
 .entry-details .material-icons {
   vertical-align: text-bottom;
 }
 
 .entry-content {
   clear: both;
+  word-wrap: break-word;
+}
+
+.entry-content .wp-caption,
+.entry-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.entry-featured-image {
+  float: left;
+  padding-right: 1em;
+}
+
+body.single .entry-featured-image {
+  float: none;
+  padding-right: 0;
 }
 
 article.page {
   margin-top: 4em;
+}
+
+.entry-comments {
+  position: relative;
+}
+
+.entry-comments .entry-comments-icon {
+  float: left;
+  font-size: 5.84em;
+}
+
+.comments-count {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.comments-count .comments-number {
+  position: absolute;
+  top: 0.4em;
+  left: 0.3em;
+  font-weight: bold;
+  color: white;
 }
 
 
@@ -4246,6 +4311,36 @@ article.page {
   padding-right: 2em;
 }
 
+
+body .search-form {
+  width: 100%;
+  cursor: default;
+  display: block;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.5em;
+}
+
+.search-form .material-icons {
+  display: block;
+  width: 1em;
+  padding-right: 1em;
+  float: left;
+}
+
+.search-form .search-field {
+  display: block;
+  width: 100%;
+  border-bottom-width: 0;
+  height: 1.5em;
+  margin-bottom: 0;
+}
+
+form.search-form input.search-field:focus {
+  border-bottom-width: 0;
+  box-shadow: none;
+}
 
 .card-panel {
   transition: box-shadow .25s;
@@ -4764,7 +4859,7 @@ a.waves-effect .waves-ripple {
     width: 80%;
   }
 }
-.modal h1, .modal h2, .modal h3, .modal h4 {
+.modal h1, .modal h2, .modal .page-title, .modal h3, .modal h4 {
   margin-top: 0;
 }
 .modal .modal-content {

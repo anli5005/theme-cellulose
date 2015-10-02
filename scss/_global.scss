@@ -12,13 +12,19 @@ body {
 }
 
 .main {
-  @extend .container;
   font-size: 13pt;
   padding-bottom: 20px;
 }
 
-body.expanded-header .main {
-  padding-top: 10px;
+.main,
+.main-sidebar {
+  margin-top: 26px;
+}
+
+.row aside.main-sidebar {
+	border-radius: 4px;
+	background-color: #dddddd;
+	padding: 1em 1em 1em 1em;
 }
 
 .material-icons {

@@ -4,6 +4,7 @@ body.single .main p {
 
 .main > article {
 	margin-bottom: 4em;
+	clear: both;
 }
 
 .entry-title a {
@@ -21,16 +22,65 @@ body.single .main p {
 	margin-bottom: 1em;
 }
 
+.entry-details a {
+  color: darken($link-color, 10%);
+}
+
+.entry-details a:hover,
+.entry-details a:active,
+.entry-details a:focus {
+  text-decoration: underline;
+}
+
 .entry-details .material-icons {
 	vertical-align: text-bottom;
 }
 
 .entry-content {
 	clear: both;
+	word-wrap: break-word;
+}
+
+.entry-content .wp-caption,
+.entry-content img, {
+	max-width: 100%;
+	height: auto;
+}
+
+.entry-featured-image {
+	float: left;
+	padding-right: 1em;
+}
+
+body.single .entry-featured-image {
+	float: none;
+	padding-right: 0;
 }
 
 article.page {
 	margin-top: 4em;
+}
+
+.entry-comments {
+	position: relative;
+}
+
+.entry-comments .entry-comments-icon {
+	float: left;
+	font-size: 5.84em;
+}
+
+.comments-count {
+	width: 100%;
+	word-wrap: break-word;
+}
+
+.comments-count .comments-number {
+	position: absolute;
+	top: 0.4em;
+	left: 0.3em;
+	font-weight: bold;
+	color: white;
 }
 
 /* NEWLINE */

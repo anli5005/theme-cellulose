@@ -81,6 +81,14 @@ module.exports = function(grunt) {
 					from: /\/\* Progress Bar \*\/\n/,
 					to: ""
 				}]
+			},
+			js: {
+				src: ["dist/theme-cellulose/js/scripts.js"],
+				overwrite: true,
+				replacements: [{
+					from: /\/\/ Velocity has conflicts when loaded with jQuery, this will check for it[^i]*( |\n)*if[^\}]*( |\n)*\}( |\n)*else[^\}]*\}/,
+					to: "var Vel = jQuery.Velocity;"
+				}]
 			}
 		},
 		autoprefixer: {
@@ -119,7 +127,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	
 	grunt.registerTask("css", ["clean:css", "sass:css", "replace:css", "autoprefixer:css", "cssmin:css"]);
-	grunt.registerTask("js", ["clean:js", "concat:js", "uglify:js"]);
+	grunt.registerTask("js", ["clean:js", "concat:js", "replace:js", "uglify:js"]);
 	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js"]);
 	
 	grunt.registerTask("default", ["dist"]);

@@ -15,11 +15,11 @@
 		
 		<header class="site-header <?php echo( tcellulose_header_expanded() ? "expand expanded " : "" ); ?>">
 			
-			<h1 class="site-title"><a href="<?php echo( esc_url( home_url( "/", "relative" ) ) ); ?>"><?php echo( esc_html( get_bloginfo( "name" ) ) ); ?></a></h1>
+			<<?php echo( is_front_page() ? 'h1' : 'p' ); ?> class="site-title"><a href="<?php echo( esc_url( home_url( "/", "relative" ) ) ); ?>"><?php echo( esc_html( get_bloginfo( "name" ) ) ); ?></a></h1>
 			<?php if ( tcellulose_header_expanded() ): ?>
 				<p class="site-tagline"><?php echo( esc_html( get_bloginfo( "description" ) ) ); ?></p>
 				
-				<h2 class="page-title"><?php
+				<<?php echo( is_front_page() ? 'p' : 'h1' ); ?> class="page-title"><?php
 					
 					if ( is_page() ) {
 						echo( esc_html( get_the_title() ) );

@@ -37,6 +37,16 @@ function tcellulose_add_body_classes( $classes ) {
 
 function tcellulose_register_widget_areas() {
 	register_sidebar( array(
+		'name' => __( 'Sidebar', 'tcellulose' ),
+		'id' => 'tcellulose-sidebar',
+		'description' => __( 'The widget area for the theme sidebar', 'tcellulose' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h5 class="widget-title">',
+		'after_title' => '</h5>'
+	) );
+	
+	register_sidebar( array(
 		'name' => __( 'Footer', 'tcellulose' ),
 		'id' => 'tcellulose-footer',
 		'description' => __( 'The widget area for the theme footer', 'tcellulose' ),
@@ -47,10 +57,16 @@ function tcellulose_register_widget_areas() {
 	) );
 }
 
+function tcellulose_add_theme_support() {
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'html5', array( 'search-form' ) );
+}
+
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_styles" );
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_script" );
 
 add_action( "after_setup_theme", "tcellulose_register_menus" );
+add_action( "after_setup_theme", "tcellulose_add_theme_support" );
 
 add_action( "widgets_init", 'tcellulose_register_widget_areas' );
 

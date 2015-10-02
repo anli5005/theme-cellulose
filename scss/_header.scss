@@ -4,10 +4,10 @@
   position: fixed;
   top: 0;
   z-index: 4;
-  
+
   background-color: $primary-color;
   color: color( "shades", "black" );
-  
+
   @extend .z-depth-3;
 }
 
@@ -16,13 +16,13 @@
   font-weight: 500;
   margin-top: 0;
   margin-bottom: 0;
-  
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  
+
   a {
-    color: color( "shades", "black" );
+	color: color( "shades", "black" );
   }
 }
 
@@ -34,25 +34,25 @@
   display: block;
   overflow-x: auto;
   white-space: nowrap;
-      
-  & > li {
-    white-space: nowrap;
-    
-    display: inline-block;
-    float: none;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: .8px;
 
-    & > a {
-      color: color( "shades", "black" );
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      &:hover {
-        color: color( "shades", "black" );
-      }
-    }
+  & > li {
+	white-space: nowrap;
+
+	display: inline-block;
+	float: none;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: .8px;
+
+	& > a {
+	  color: color( "shades", "black" );
+	  display: inline-block;
+	  width: 100%;
+	  height: 100%;
+	  &:hover {
+		color: color( "shades", "black" );
+	  }
+	}
   }
 }
 
@@ -87,158 +87,166 @@ body.admin-bar .site-header {
   position: relative;
   top: 0;
 }
-  
+
 .site-header.expand.expanded .site-title,
 .site-header.expand.expanded .site-tagline {
   width: 100%;
 }
 
+.page-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @extend h2;
+}
+
 @media only screen and (orientation: portrait) and (min-width: 841px), only screen and (orientation: landscape) and (min-width: 961px) {
   .site-header {
-    height: 64px;
-    padding: 0 0 0 24px;
+	height: 64px;
+	padding: 0 0 0 24px;
   }
-  
+
   .site-title {
-    float: left;
+	float: left;
+	margin-right: 0;
+	height: 64px;
+	line-height: 64px;
+  }
+
+  .site-title,
+  .page-title {
     width: 51.458980345%;
-    margin-right: 0;
-    height: 64px;
-    line-height: 64px;
   }
-  
+
   .site-navigation {
-    width: 48.541019655%;
+	width: 48.541019655%;
   }
-  
+
   .site-navigation,
   .site-navigation > ul {
-    float: right;
+	float: right;
   }
-  
+
   .site-navigation > ul {
-    max-width: 100%;
+	max-width: 100%;
   }
-  
+
   .site-navigation,
   .site-navigation > ul,
   .site-navigation > ul > li {
-    height: 100%;
+	height: 100%;
   }
-  
+
   .site-navigation > ul > li {
-    line-height: 64px;
+	line-height: 64px;
   }
-  
+
   .site-title,
   .site-tagline,
   .page-title,
   .site-navigation > ul {
-    padding-right: 24px;
+	padding-right: 24px;
   }
-  
+
   .site-header.expand.expanded {
-    padding-bottom: 1.424rem;
+	padding-bottom: 1.424rem;
   }
-  
+
   .site-header.expand.expanded .page-title {
-    width: 51.458980345%;
+	width: 51.458980345%;
   }
-  
+
   .site-header.expand.expanded .site-title {
-    float: none;
+	float: none;
   }
-  
+
   .site-header.expand.expanded .site-navigation,
   .site-header.expand.expanded .site-navigation > ul,
   .site-header.expand.expanded .site-navigation > ul > li {
-    height: 64px;
+	height: 64px;
   }
-  
+
   .site-header.expand.expanded .site-navigation {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+	position: absolute;
+	bottom: 0;
+	right: 0;
   }
-  
+
   body {
-    padding-top: 90px;
+	padding-top: 64px;
   }
 }
 
 @media only screen and (orientation: portrait) and (max-width: 840px), only screen and (orientation: landscape) and (max-width: 960px) {
   .site-header {
-    padding: 0;
+	padding: 0;
   }
-  
+
   .site-title {
-    width: 100%;
-    padding-right: 16px;
+	width: 100%;
+	padding-right: 16px;
   }
-  
+
   .site-title,
   .site-tagline,
   .page-title,
   .site-navigation > ul {
-    padding-left: 16px;
+	padding-left: 16px;
   }
-  
+
   .site-navigation,
   .site-navigation > ul {
-    width: 100%;
+	width: 100%;
   }
-  
+
   .site-navigation,
   .site-navigation > ul,
   .site-navigation > ul > li,
   .site-navigation > ul > li > a {
-    height: 48px;
-    line-height: 48px;
+	height: 48px;
+	line-height: 48px;
   }
-  
+
   .site-navigation > ul > li:hover {
-    background-color: transparent;
+	background-color: transparent;
   }
-  
+
   .site-header.expanded.expand .site-title {
-    height: 56px;
-    line-height: 56px;
+	height: 56px;
+	line-height: 56px;
   }
 }
 
 @media only screen and (orientation: portrait) and (max-width: 840px) {
   .site-header {
-    height: 104px;
+	height: 104px;
   }
-  
+
   .site-title {
-    height: 56px;
-    line-height: 56px;
-  }
-  
-  body {
-    padding-top: 120px;
+	height: 56px;
+	line-height: 56px;
   }
 }
 
 @media only screen and (orientation: landscape) and (max-width: 960px) {
   .site-header {
-    height: 96px;
+	height: 96px;
   }
-  
+
   .site-title {
-    height: 48px;
-    line-height: 48px;
+	height: 48px;
+	line-height: 48px;
   }
-  
+
   body {
-    padding-top: 112px;
+	padding-top: 112px;
   }
 }
 
 @media only screen and (max-width: 782px) {
   body.admin-bar .site-header {
-    top: 46px;
+	top: 0;
+	position: sticky;
   }
 }
 
