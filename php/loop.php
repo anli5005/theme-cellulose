@@ -1,9 +1,9 @@
 <?php
 if ( have_posts() ):
-	
-	while ( have_posts() ): 
+
+	while ( have_posts() ):
 	the_post(); ?>
-	<article <?php post_class(); ?>>
+	<article <?php post_class( 'card' ); ?>>
 		<header class="entry-header">
 			<h2 class="entry-title"><a href="<?php echo( esc_url( get_permalink() ) ); ?>"><?php the_title(); ?></a></h3>
 			<?php get_template_part( "entry-details" ); ?>
@@ -20,7 +20,7 @@ if ( have_posts() ):
 		</div>
 	</article>
 	<?php endwhile;
-	
+
 endif;
 
 ?>

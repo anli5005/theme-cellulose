@@ -45,7 +45,7 @@ function tcellulose_register_widget_areas() {
 		'before_title' => '<h5 class="widget-title">',
 		'after_title' => '</h5>'
 	) );
-	
+
 	register_sidebar( array(
 		'name' => __( 'Footer', 'tcellulose' ),
 		'id' => 'tcellulose-footer',

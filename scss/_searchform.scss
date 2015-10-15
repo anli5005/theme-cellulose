@@ -1,0 +1,27 @@
+body .search-form {
+	width: 100%;
+	cursor: default;
+	display: block;
+	display: flex;
+	padding: 0.5em;
+}
+
+.search-form .material-icons {
+	display: block;
+	width: 1em;
+	padding-right: 1em;
+	float: left;
+}
+
+.search-form .search-field {
+	display: block;
+	width: 100%;
+	border-bottom-width: 0;
+	height: 1.5em;
+	margin-bottom: 0;
+}
+
+form.search-form input.search-field:focus {
+	border-bottom-width: 0;
+	box-shadow: none;
+}
