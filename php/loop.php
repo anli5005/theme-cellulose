@@ -2,25 +2,28 @@
 if ( have_posts() ):
 
 	while ( have_posts() ):
-	the_post(); ?>
-	<article <?php post_class( 'card' ); ?>>
-		<header class="entry-header">
-			<h2 class="entry-title"><a href="<?php echo( esc_url( get_permalink() ) ); ?>"><?php the_title(); ?></a></h3>
-			<?php get_template_part( "entry-details" ); ?>
-		</header>
-		<div class="entry-content">
+		the_post(); ?>
+		<article <?php post_class( is_singular() ? 'card' : 'card hoverable' ); ?>>
 			<?php if ( has_post_thumbnail() ): ?>
-			<div class="entry-featured-image">
-				<?php
-					the_post_thumbnail( 'medium', array( 'class' => "attachment-medium responsive-img" ) );
-				?>
-			</div>
-			<?php endif;
-			the_content(); ?>
-		</div>
-	</article>
-	<?php endwhile;
+				<div class="card-image entry-featured-image-css-support-coming-soon">
+					<?php
+					the_post_thumbnail( 'large', array( 'class' => "attachment-large responsive-img" ) );
+					?>
+					<h2 class="card-title entry-title"><a href="<?php echo( esc_url( get_permalink() ) ); ?>"><?php the_title(); ?></a></h2>
+				</div>
+			<?php endif; ?>
+			<div class="card-content">
+				<header class="entry-details">
+					<?php if ( ! has_post_thumbnail() ): ?><h2 class="card-title entry-title"><a href="<?php echo( esc_url( get_permalink() ) ); ?>"><?php the_title(); ?></a></h2><?php endif; ?>
+						<?php get_template_part( "entry-details" ); ?>
+					</header>
+					<div class="entry-content">
+						<?php is_singular() ? the_content() : the_excerpt(); ?>
+					</div>
+				</div>
+			</article>
+		<?php endwhile;
 
-endif;
+	endif;
 
-?>
+	?>
