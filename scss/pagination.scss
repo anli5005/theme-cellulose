@@ -1,0 +1,36 @@
+.cellulose-pagination {
+  position: relative;
+
+  .pagination-link .btn-floating {
+    margin-right: 0.5em;
+  }
+
+  .paginaton-link {
+    vertical-align: middle;
+  }
+
+  .pagination-link:first-child {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    float: left;
+  }
+  .pagination-link:last-child {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    float: right;
+  }
+}
+.cellulose-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cellulose-pagination .card-panel {
+  width: auto;
+}
