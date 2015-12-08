@@ -1,4 +1,24 @@
-#tcellulose-sidebar li > a {
+#tcellulose-sidebar {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#tcellulose-sidebar > aside {
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  &:last-child {
+    border-bottom-width: 0;
+  }
+}
+
+#tcellulose-sidebar > aside > h5 {
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: normal;
+  font-size: 16px;
+}
+
+#tcellulose-sidebar a {
   height: auto;
   line-height: 1.5em;
   padding: 0.5em 0;
@@ -8,6 +28,6 @@
   background-color: $sidenav-bg-color;
 }
 
-#tcellulose-sidebar li > a:hover {
+#tcellulose-sidebar a:hover {
   color: $secondary-color;
 }
