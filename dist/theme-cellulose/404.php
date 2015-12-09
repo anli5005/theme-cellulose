@@ -11,9 +11,8 @@ get_header();
 		<p><?php _e( "It looks like the page you requested wasn't found. Want to try searching the website?" ); ?></p>
 		<?php get_search_form(); ?>
 	</div>
-	
-	<?php get_sidebar(); ?>
 </div>
+<?php get_sidebar(); ?>
 
 <?php
 
