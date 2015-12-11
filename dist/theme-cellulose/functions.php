@@ -67,10 +67,14 @@ function tcellulose_add_pagination_button_classes() {
 	return 'class="waves-effect waves-light btn-floating"';
 }
 
+function tcellulose_comment_field_filter( $field ) {
+	return preg_replace( '/<p class="([^"]*)">/', '<p class="$1 input-field">', $field );
+}
+
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_styles" );
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_script" );
 
-add_action( "after_setup_theme", "tcellulose_register_menus" );
+add_action( "after_setup_theme", "tcellulose_register_menus"    );
 add_action( "after_setup_theme", "tcellulose_add_theme_support" );
 
 add_action( "widgets_init", 'tcellulose_register_widget_areas' );
@@ -79,7 +83,11 @@ add_filter( "wp_page_menu", "tcellulose_page_menu_filter", 10, 1 );
 
 add_filter( "body_class", "tcellulose_add_body_classes", 10, 1 );
 
-add_filter( 'next_posts_link_attributes', 'tcellulose_add_pagination_button_classes', 10, 1 );
+add_filter( 'next_posts_link_attributes',     'tcellulose_add_pagination_button_classes', 10, 1 );
 add_filter( 'previous_posts_link_attributes', 'tcellulose_add_pagination_button_classes', 10, 1 );
+
+add_filter( "comment_form_field_author", "tcellulose_comment_field_filter", 10, 1 );
+add_filter( "comment_form_field_email",  "tcellulose_comment_field_filter", 10, 1 );
+add_filter( "comment_form_field_url",    "tcellulose_comment_field_filter", 10, 1 );
 
 ?>
