@@ -28,6 +28,7 @@ if ( have_posts() ):
 						<?php is_singular() ? the_content() : the_excerpt(); ?>
 					</div>
 				</div>
+				<?php comments_template(); ?>
 			</article>
 		<?php endwhile; ?>
 		<?php if ( ! empty( get_the_posts_pagination() ) ): ?>

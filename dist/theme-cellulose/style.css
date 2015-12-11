@@ -6785,25 +6785,12 @@ article.page {
 }
 
 .entry-comments {
-  position: relative;
-}
-
-.entry-comments .entry-comments-icon {
-  float: left;
-  font-size: 5.84em;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: #E0E0E0;
 }
 
 .comments-count {
-  width: 100%;
-  word-wrap: break-word;
-}
-
-.comments-count .comments-number {
-  position: absolute;
-  top: 0.4em;
-  left: 0.3em;
-  font-weight: bold;
-  color: white;
+  font-size: 2rem;
 }
 
 
