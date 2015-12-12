@@ -25,6 +25,7 @@
 			</<?php echo( is_front_page() ? 'h1' : 'p' ); ?>>
 
 			<nav class="site-navigation hide-tab-scrollbar">
+				<ul>
 				<?php
 
 				// TODO: Add support for submenus
@@ -40,6 +41,7 @@
 				) );
 
 				?>
+			</ul>
 			</nav>
 
 		</header>
