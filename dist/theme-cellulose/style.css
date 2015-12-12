@@ -6786,7 +6786,8 @@ article.page {
 
 .entry-comments {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
-  background-color: #E0E0E0;
+  background-color: #F5F5F5;
+  padding: 20px;
 }
 
 .comments-count {
@@ -7100,7 +7101,7 @@ form.search-form input.search-field:focus {
   -ms-flex-pack: justify;
       justify-content: space-between;
 }
-.toast .btn, .toast .btn-large, .toast .btn-flat {
+.toast .btn, .toast .btn-large, .toast .btn-flat, .toast .entry-comments .submit, .entry-comments .toast .submit {
   margin: 0;
   margin-left: 3rem;
 }
@@ -7158,7 +7159,7 @@ form.search-form input.search-field:focus {
   will-change: transform, opacity;
 }
 
-.btn, .btn-large, .btn-flat {
+.btn, .btn-large, .btn-flat, .entry-comments .submit {
   border: none;
   border-radius: 2px;
   display: inline-block;
@@ -7185,7 +7186,7 @@ form.search-form input.search-field:focus {
   color: #9F9F9F;
 }
 
-.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
+.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i, .entry-comments .submit i {
   font-size: 1.3rem;
   line-height: inherit;
 }
@@ -7287,13 +7288,13 @@ button.btn-floating {
   opacity: 0;
 }
 
-.btn-flat {
+.btn-flat, .entry-comments .submit {
   box-shadow: none;
   background-color: transparent;
   color: #343434;
   cursor: pointer;
 }
-.btn-flat.disabled {
+.btn-flat.disabled, .entry-comments .disabled.submit {
   color: #b3b3b3;
   cursor: default;
 }
@@ -7501,7 +7502,7 @@ a.waves-effect .waves-ripple {
   height: 56px;
   width: 100%;
 }
-.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
+.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat, .modal .modal-footer .entry-comments .submit, .entry-comments .modal .modal-footer .submit {
   float: right;
   margin: 6px 0;
 }
