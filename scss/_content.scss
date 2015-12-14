@@ -7,6 +7,19 @@ body.single .main p {
 	clear: both;
 }
 
+.main article ul > li {
+  list-style-type: disc;
+}
+
+.main article ol > li {
+  list-style-type: decimal;
+}
+
+.main article ul,
+.main article ol {
+  padding-left: 1.5em;
+}
+
 .card-content .entry-title {
   margin: 0;
 }

@@ -60,7 +60,7 @@ function tcellulose_register_widget_areas() {
 function tcellulose_add_theme_support() {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
-	add_theme_support( 'html5', array( 'search-form' ) );
+	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
 }
 
 function tcellulose_add_pagination_button_classes() {

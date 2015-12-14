@@ -1,4 +1,4 @@
-<div class="container" id="content">
+<div class="container main" id="content">
 <?php
 if ( have_posts() ):
 
