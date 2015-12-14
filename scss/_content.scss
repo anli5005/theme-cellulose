@@ -116,4 +116,47 @@ article.page {
   font-size: 2rem;
 }
 
+.entry-comments > ul.comments-list {
+  padding-left: 0;
+}
+
+.comments-list li.comment {
+  list-style-type: none;
+  position: relative;
+
+  .comment-author a {
+    color: black;
+    font-weight: 500;
+  }
+
+  .comment-metadata a {
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .comment-author > img {
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    display: block;
+    float: left;
+    margin-right: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  .comment-content {
+    clear: both;
+  }
+
+  .says {
+    @extend .screen-reader-only;
+  }
+
+  .reply {
+    position: absolute;
+    top: 0;
+    right: 0;
+    @extend .btn-flat;
+  }
+}
+
 /* NEWLINE */

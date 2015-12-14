@@ -3496,7 +3496,7 @@ body {
   font-family: "Roboto", "Helvetica Neue", "Helvetica", arial, sans-serif;
 }
 
-.screen-reader-only {
+.screen-reader-only, .comments-list li.comment .says {
   position: absolute;
   left: -10000px;
   top: auto;
@@ -6807,6 +6807,39 @@ article.page {
   font-size: 2rem;
 }
 
+.entry-comments > ul.comments-list {
+  padding-left: 0;
+}
+
+.comments-list li.comment {
+  list-style-type: none;
+  position: relative;
+}
+.comments-list li.comment .comment-author a {
+  color: black;
+  font-weight: 500;
+}
+.comments-list li.comment .comment-metadata a {
+  color: rgba(0, 0, 0, 0.54);
+}
+.comments-list li.comment .comment-author > img {
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  display: block;
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+.comments-list li.comment .comment-content {
+  clear: both;
+}
+.comments-list li.comment .reply {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 
 .cellulose-pagination {
   position: relative;
@@ -7114,7 +7147,7 @@ form.search-form input.search-field:focus {
   -ms-flex-pack: justify;
       justify-content: space-between;
 }
-.toast .btn, .toast .btn-large, .toast .btn-flat, .toast .entry-comments .submit, .entry-comments .toast .submit {
+.toast .btn, .toast .btn-large, .toast .btn-flat, .toast .entry-comments .submit, .entry-comments .toast .submit, .toast .comments-list li.comment .reply, .comments-list li.comment .toast .reply {
   margin: 0;
   margin-left: 3rem;
 }
@@ -7172,7 +7205,7 @@ form.search-form input.search-field:focus {
   will-change: transform, opacity;
 }
 
-.btn, .btn-large, .btn-flat, .entry-comments .submit {
+.btn, .btn-large, .btn-flat, .entry-comments .submit, .comments-list li.comment .reply {
   border: none;
   border-radius: 2px;
   display: inline-block;
@@ -7199,7 +7232,7 @@ form.search-form input.search-field:focus {
   color: #9F9F9F;
 }
 
-.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i, .entry-comments .submit i {
+.btn i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i, .entry-comments .submit i, .comments-list li.comment .reply i {
   font-size: 1.3rem;
   line-height: inherit;
 }
@@ -7301,13 +7334,13 @@ button.btn-floating {
   opacity: 0;
 }
 
-.btn-flat, .entry-comments .submit {
+.btn-flat, .entry-comments .submit, .comments-list li.comment .reply {
   box-shadow: none;
   background-color: transparent;
   color: #343434;
   cursor: pointer;
 }
-.btn-flat.disabled, .entry-comments .disabled.submit {
+.btn-flat.disabled, .entry-comments .disabled.submit, .comments-list li.comment .disabled.reply {
   color: #b3b3b3;
   cursor: default;
 }
@@ -7515,7 +7548,7 @@ a.waves-effect .waves-ripple {
   height: 56px;
   width: 100%;
 }
-.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat, .modal .modal-footer .entry-comments .submit, .entry-comments .modal .modal-footer .submit {
+.modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat, .modal .modal-footer .entry-comments .submit, .entry-comments .modal .modal-footer .submit, .modal .modal-footer .comments-list li.comment .reply, .comments-list li.comment .modal .modal-footer .reply {
   float: right;
   margin: 6px 0;
 }
