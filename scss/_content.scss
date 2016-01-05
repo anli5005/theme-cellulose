@@ -109,10 +109,15 @@ article.page {
 }
 
 .entry-comments .submit {
-  @extend .btn-flat;
+  @extend .btn;
 }
 
-.comments-count {
+.entry-comments .input-field label {
+  left: 0;
+}
+
+.comments-count,
+#reply-title {
   font-size: 2rem;
 }
 
@@ -151,11 +156,13 @@ article.page {
     @extend .screen-reader-only;
   }
 
-  .reply {
+  & > .comment-body > .reply {
     position: absolute;
     top: 0;
     right: 0;
-    @extend .btn-flat;
+    @extend .btn;
+    box-shadow: none !important;
+    background-color: #E0E0E0 !important;
   }
 }
 
