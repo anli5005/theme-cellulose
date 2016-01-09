@@ -6741,6 +6741,8 @@ body.home > .main > .sizer {
 
 .card-title {
   z-index: 2;
+  word-wrap: break-word;
+  width: 100%;
 }
 
 .card-image {
@@ -6749,6 +6751,13 @@ body.home > .main > .sizer {
 
 .card-image .entry-title a {
   color: white;
+}
+
+.card-image .card-title {
+  margin: 0;
+  max-height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-image::after {
