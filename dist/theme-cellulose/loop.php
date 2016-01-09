@@ -36,7 +36,7 @@ if ( have_posts() ):
 				<?php if ( get_next_posts_link() ): ?>
 					<div class="pagination-link">
 						<?php next_posts_link( '<i class="material-icons">navigate_before</i>' ); ?>
-						Older
+						<span>Older</span>
 					</div>
 				<?php endif; ?>
 				<div class="card-panel">
@@ -51,7 +51,7 @@ if ( have_posts() ):
 				</div>
 				<?php if ( get_previous_posts_link() ): ?>
 					<div class="pagination-link">
-						Newer
+						<span>Newer</span>
 						<?php previous_posts_link( '<i class="material-icons">navigate_next</i>' ); ?>
 					</div>
 				<?php endif; ?>

@@ -7,6 +7,13 @@ body.single .main p {
 	clear: both;
 }
 
+body.home > .main > article,
+body.home > .main > .sizer {
+  width: 40%;
+  width: calc( 50% - 5px );
+  margin: 0 0 10px 0;
+}
+
 .main article ul > li {
   list-style-type: disc;
 }
@@ -18,6 +25,11 @@ body.single .main p {
 .main article ul,
 .main article ol {
   padding-left: 1.5em;
+}
+
+.main article .card-title {
+  font-weight: normal;
+  font-size: 24px;
 }
 
 .card-content .entry-title {
@@ -79,7 +91,7 @@ header.entry-details .entry-taxonomies {
 }
 
 .entry-taxonomies .chip {
-  margin-left: 0.5em;
+  margin-right: 0.5em;
   margin-bottom: 0.5em;
 }
 
@@ -127,7 +139,10 @@ article.page {
 
 .comments-list li.comment {
   list-style-type: none;
-  position: relative;
+
+  article {
+    position: relative;
+  }
 
   .comment-author a {
     color: black;
@@ -156,13 +171,38 @@ article.page {
     @extend .screen-reader-only;
   }
 
+  .comment-awaiting-moderation {
+    position: absolute;
+    font-size: 0.9rem;
+    top: 40px;
+    right: 0;
+    color: rgba(0, 0, 0, 0.38);
+  }
+
   & > .comment-body > .reply {
     position: absolute;
     top: 0;
     right: 0;
-    @extend .btn;
-    box-shadow: none !important;
-    background-color: #E0E0E0 !important;
+    background-color: #E0E0E0;
+    text-transform: lowercase;
+    font-family: "Material Icons";
+    transition: background-color 0.5s;
+    height: 35px;
+    width: 35px;
+    font-size: 1.4em;
+    text-align: center;
+    @extend .circle;
+
+    &:hover {
+      background-color: #BDBDBD;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  body.home > .main > article,
+  body.home > .main > .sizer {
+    width: 100%;
   }
 }
 

@@ -1,5 +1,6 @@
 .cellulose-pagination {
   position: relative;
+  width: 100%;
 
   .pagination-link .btn-floating {
     margin-right: 0.5em;
@@ -33,4 +34,15 @@
 }
 .cellulose-pagination .card-panel {
   width: auto;
+}
+
+@media only screen and (orientation: portrait) and (max-width: 840px), only screen and (orientation: landscape) and (max-width: 960px) {
+  .cellulose-pagination .pagination-link span {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
 }

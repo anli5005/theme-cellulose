@@ -218,12 +218,16 @@ body.admin-bar .site-header {
   .site-navigation {
     position: absolute;
     bottom: 0;
-    left: 80px;
+    left: 0;
   }
 
   .site-navigation,
   .site-navigation > ul {
 	width: 100%;
+  }
+
+  .site-navigation > ul {
+  	padding-left: 80px;
   }
 
   .site-navigation > ul > li:hover {

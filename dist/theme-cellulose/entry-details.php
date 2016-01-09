@@ -1,5 +1,4 @@
 <?php if ( get_post_type() == 'post' ): ?>
-	<div class="row">
 	<div class="entry-author col s12 m4 l4">
 		<?php echo( get_avatar( get_the_author_meta( 'ID' ), 48, get_option( 'avatar_default', 'mystery' ), '', array(
 			'class' => 'circle entry-avatar'
@@ -7,7 +6,7 @@
 		<p><?php the_author(); ?></p>
 		<p><?php echo( get_the_date() ); ?></p>
 	</div>
-	<div class="entry-taxonomies col s12 m8 m8">
+	<div class="entry-taxonomies">
 	<?php if ( has_tag() ): ?>
 	<div class="entry-tags">
 		<span class="screen-reader-only">Tags: </span>
@@ -30,6 +29,5 @@
 		?>
 	</div>
 <?php endif; ?>
-</div>
 </div>
 <?php endif; ?>

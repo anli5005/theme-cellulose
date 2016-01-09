@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-	
+
 	grunt.initConfig({
 		clean: {
 			dist: ["dist"],
@@ -45,7 +45,10 @@ module.exports = function(grunt) {
                 "js/materialize/scrollFire.js",
                 "js/materialize/date_picker/picker.js",
                 "js/materialize/date_picker/picker.date.js",
-                "js/materialize/character_counter.js"
+                "js/materialize/character_counter.js",
+								"js/masonry/imagesloaded.pkgd.js",
+								"js/masonry/masonry.pkgd.js",
+								"js/cellulose.js",
              ],
 				dest: "dist/theme-cellulose/js/scripts.js",
 			}
@@ -116,7 +119,7 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	
+
 	grunt.loadNpmTasks("grunt-contrib-clean");
 	grunt.loadNpmTasks("grunt-contrib-copy");
 	grunt.loadNpmTasks("grunt-contrib-cssmin");
@@ -125,11 +128,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-text-replace");
 	grunt.loadNpmTasks("grunt-autoprefixer");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
-	
+
 	grunt.registerTask("css", ["clean:css", "sass:css", "replace:css", "autoprefixer:css", "cssmin:css"]);
 	grunt.registerTask("js", ["clean:js", "concat:js", "replace:js", "uglify:js"]);
 	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js"]);
-	
+
 	grunt.registerTask("default", ["dist"]);
-	
+
 };

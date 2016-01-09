@@ -2,14 +2,8 @@
 <html>
 
 	<head>
-		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 		<?php wp_head(); ?>
-		<script>
-		// TODO: This is against the WordPress guidelines. Switching this later
-		jQuery(function() {
-			jQuery(".sidebar-trigger").sideNav();
-		});
-		</script>
 	</head>
 
 	<body <?php body_class(); ?>>

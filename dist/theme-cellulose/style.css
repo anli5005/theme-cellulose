@@ -2588,7 +2588,7 @@ ul {
 }
 
 a {
-  color: #039be5;
+  color: #536dfe;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -2621,11 +2621,11 @@ ul li {
   box-shadow: none !important;
 }
 
-.z-depth-1, nav, .site-header, .card-panel, .card, .toast, .btn, .entry-comments .submit, .comments-list li.comment > .comment-body > .reply, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+.z-depth-1, nav, .site-header, .card-panel, .card, .toast, .btn, .entry-comments .submit, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.z-depth-1-half, .btn:hover, .entry-comments .submit:hover, .comments-list li.comment > .comment-body > .reply:hover, .btn-large:hover, .btn-floating:hover {
+.z-depth-1-half, .btn:hover, .entry-comments .submit:hover, .btn-large:hover, .btn-floating:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -3018,7 +3018,7 @@ td, th {
   padding-left: 72px;
   position: relative;
 }
-.collection .collection-item.avatar .circle {
+.collection .collection-item.avatar .circle, .collection .collection-item.avatar .comments-list li.comment > .comment-body > .reply, .comments-list .collection .collection-item.avatar li.comment > .comment-body > .reply {
   position: absolute;
   width: 42px;
   height: 42px;
@@ -3027,7 +3027,7 @@ td, th {
   display: inline-block;
   vertical-align: middle;
 }
-.collection .collection-item.avatar i.circle {
+.collection .collection-item.avatar i.circle, .collection .collection-item.avatar .comments-list li.comment > .comment-body > i.reply, .comments-list .collection .collection-item.avatar li.comment > .comment-body > i.reply {
   font-size: 18px;
   line-height: 42px;
   color: #fff;
@@ -3266,7 +3266,7 @@ nav ul a span.badge {
   user-select: none;
 }
 
-.circle {
+.circle, .comments-list li.comment > .comment-body > .reply {
   border-radius: 50%;
 }
 
@@ -6636,12 +6636,16 @@ body.admin-bar .site-header {
   .site-navigation {
     position: absolute;
     bottom: 0;
-    left: 80px;
+    left: 0;
   }
 
   .site-navigation,
   .site-navigation > ul {
     width: 100%;
+  }
+
+  .site-navigation > ul {
+    padding-left: 80px;
   }
 
   .site-navigation > ul > li:hover {
@@ -6702,6 +6706,13 @@ body.single .main p {
   clear: both;
 }
 
+body.home > .main > article,
+body.home > .main > .sizer {
+  width: 40%;
+  width: calc( 50% - 5px );
+  margin: 0 0 10px 0;
+}
+
 .main article ul > li {
   list-style-type: disc;
 }
@@ -6713,6 +6724,11 @@ body.single .main p {
 .main article ul,
 .main article ol {
   padding-left: 1.5em;
+}
+
+.main article .card-title {
+  font-weight: normal;
+  font-size: 24px;
 }
 
 .card-content .entry-title {
@@ -6774,7 +6790,7 @@ header.entry-details .entry-taxonomies {
 }
 
 .entry-taxonomies .chip {
-  margin-left: 0.5em;
+  margin-right: 0.5em;
   margin-bottom: 0.5em;
 }
 
@@ -6818,6 +6834,8 @@ article.page {
 
 .comments-list li.comment {
   list-style-type: none;
+}
+.comments-list li.comment article {
   position: relative;
 }
 .comments-list li.comment .comment-author a {
@@ -6839,17 +6857,40 @@ article.page {
 .comments-list li.comment .comment-content {
   clear: both;
 }
+.comments-list li.comment .comment-awaiting-moderation {
+  position: absolute;
+  font-size: 0.9rem;
+  top: 40px;
+  right: 0;
+  color: rgba(0, 0, 0, 0.38);
+}
 .comments-list li.comment > .comment-body > .reply {
   position: absolute;
   top: 0;
   right: 0;
-  box-shadow: none !important;
-  background-color: #E0E0E0 !important;
+  background-color: #E0E0E0;
+  text-transform: lowercase;
+  font-family: "Material Icons";
+  transition: background-color 0.5s;
+  height: 35px;
+  width: 35px;
+  font-size: 1.4em;
+  text-align: center;
+}
+.comments-list li.comment > .comment-body > .reply:hover {
+  background-color: #BDBDBD;
 }
 
+@media only screen and (max-width: 767px) {
+  body.home > .main > article,
+  body.home > .main > .sizer {
+    width: 100%;
+  }
+}
 
 .cellulose-pagination {
   position: relative;
+  width: 100%;
 }
 .cellulose-pagination .pagination-link .btn-floating {
   margin-right: 0.5em;
@@ -6892,6 +6933,16 @@ article.page {
   width: auto;
 }
 
+@media only screen and (orientation: portrait) and (max-width: 840px), only screen and (orientation: landscape) and (max-width: 960px) {
+  .cellulose-pagination .pagination-link span {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+}
 #tcellulose-sidebar {
   font-size: 14px;
   font-weight: 500;
@@ -7154,7 +7205,7 @@ form.search-form input.search-field:focus {
   -ms-flex-pack: justify;
       justify-content: space-between;
 }
-.toast .btn, .toast .entry-comments .submit, .entry-comments .toast .submit, .toast .comments-list li.comment > .comment-body > .reply, .comments-list .toast li.comment > .comment-body > .reply, .toast .btn-large, .toast .btn-flat {
+.toast .btn, .toast .entry-comments .submit, .entry-comments .toast .submit, .toast .btn-large, .toast .btn-flat {
   margin: 0;
   margin-left: 3rem;
 }
@@ -7212,7 +7263,7 @@ form.search-form input.search-field:focus {
   will-change: transform, opacity;
 }
 
-.btn, .entry-comments .submit, .comments-list li.comment > .comment-body > .reply, .btn-large, .btn-flat {
+.btn, .entry-comments .submit, .btn-large, .btn-flat {
   border: none;
   border-radius: 2px;
   display: inline-block;
@@ -7225,26 +7276,26 @@ form.search-form input.search-field:focus {
   -webkit-tap-highlight-color: transparent;
 }
 
-.btn.disabled, .entry-comments .disabled.submit, .comments-list li.comment > .comment-body > .disabled.reply, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn:disabled, .entry-comments .submit:disabled, .comments-list li.comment > .comment-body > .reply:disabled, .btn-large:disabled, .btn-large:disabled, .btn-floating:disabled {
+.btn.disabled, .entry-comments .disabled.submit, .disabled.btn-large, .btn-floating.disabled, .btn-large.disabled, .btn:disabled, .entry-comments .submit:disabled, .btn-large:disabled, .btn-large:disabled, .btn-floating:disabled {
   background-color: #DFDFDF !important;
   box-shadow: none;
   color: #9F9F9F !important;
   cursor: default;
 }
-.btn.disabled *, .entry-comments .disabled.submit *, .comments-list li.comment > .comment-body > .disabled.reply *, .disabled.btn-large *, .btn-floating.disabled *, .btn-large.disabled *, .btn:disabled *, .entry-comments .submit:disabled *, .comments-list li.comment > .comment-body > .reply:disabled *, .btn-large:disabled *, .btn-large:disabled *, .btn-floating:disabled * {
+.btn.disabled *, .entry-comments .disabled.submit *, .disabled.btn-large *, .btn-floating.disabled *, .btn-large.disabled *, .btn:disabled *, .entry-comments .submit:disabled *, .btn-large:disabled *, .btn-large:disabled *, .btn-floating:disabled * {
   pointer-events: none;
 }
-.btn.disabled:hover, .entry-comments .disabled.submit:hover, .comments-list li.comment > .comment-body > .disabled.reply:hover, .disabled.btn-large:hover, .btn-floating.disabled:hover, .btn-large.disabled:hover, .btn:disabled:hover, .entry-comments .submit:disabled:hover, .comments-list li.comment > .comment-body > .reply:disabled:hover, .btn-large:disabled:hover, .btn-large:disabled:hover, .btn-floating:disabled:hover {
+.btn.disabled:hover, .entry-comments .disabled.submit:hover, .disabled.btn-large:hover, .btn-floating.disabled:hover, .btn-large.disabled:hover, .btn:disabled:hover, .entry-comments .submit:disabled:hover, .btn-large:disabled:hover, .btn-large:disabled:hover, .btn-floating:disabled:hover {
   background-color: #DFDFDF;
   color: #9F9F9F;
 }
 
-.btn i, .entry-comments .submit i, .comments-list li.comment > .comment-body > .reply i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
+.btn i, .entry-comments .submit i, .btn-large i, .btn-floating i, .btn-large i, .btn-flat i {
   font-size: 1.3rem;
   line-height: inherit;
 }
 
-.btn, .entry-comments .submit, .comments-list li.comment > .comment-body > .reply, .btn-large {
+.btn, .entry-comments .submit, .btn-large {
   text-decoration: none;
   color: #fff;
   background-color: #3d5afe;
@@ -7253,7 +7304,7 @@ form.search-form input.search-field:focus {
   transition: 0.2s ease-out;
   cursor: pointer;
 }
-.btn:hover, .entry-comments .submit:hover, .comments-list li.comment > .comment-body > .reply:hover, .btn-large:hover {
+.btn:hover, .entry-comments .submit:hover, .btn-large:hover {
   background-color: #5670fe;
 }
 
@@ -7555,7 +7606,7 @@ a.waves-effect .waves-ripple {
   height: 56px;
   width: 100%;
 }
-.modal .modal-footer .btn, .modal .modal-footer .entry-comments .submit, .entry-comments .modal .modal-footer .submit, .modal .modal-footer .comments-list li.comment > .comment-body > .reply, .comments-list .modal .modal-footer li.comment > .comment-body > .reply, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
+.modal .modal-footer .btn, .modal .modal-footer .entry-comments .submit, .entry-comments .modal .modal-footer .submit, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
   float: right;
   margin: 6px 0;
 }
@@ -8550,7 +8601,7 @@ select:disabled {
 .file-field input.file-path {
   width: 100%;
 }
-.file-field .btn, .file-field .entry-comments .submit, .entry-comments .file-field .submit, .file-field .comments-list li.comment > .comment-body > .reply, .comments-list .file-field li.comment > .comment-body > .reply, .file-field .btn-large {
+.file-field .btn, .file-field .entry-comments .submit, .entry-comments .file-field .submit, .file-field .btn-large {
   float: left;
   height: 3rem;
   line-height: 3rem;
@@ -9221,7 +9272,7 @@ select {
   border-color: inherit;
 }
 
-.gap-patch .circle {
+.gap-patch .circle, .gap-patch .comments-list li.comment > .comment-body > .reply, .comments-list .gap-patch li.comment > .comment-body > .reply {
   width: 1000%;
   left: -450%;
 }
@@ -9234,7 +9285,7 @@ select {
   overflow: hidden;
   border-color: inherit;
 }
-.circle-clipper .circle {
+.circle-clipper .circle, .circle-clipper .comments-list li.comment > .comment-body > .reply, .comments-list .circle-clipper li.comment > .comment-body > .reply {
   width: 200%;
   height: 100%;
   border-width: 3px;
@@ -9250,26 +9301,26 @@ select {
   right: 0;
   bottom: 0;
 }
-.circle-clipper.left .circle {
+.circle-clipper.left .circle, .circle-clipper.left .comments-list li.comment > .comment-body > .reply, .comments-list .circle-clipper.left li.comment > .comment-body > .reply {
   left: 0;
   border-right-color: transparent !important;
   -webkit-transform: rotate(129deg);
   transform: rotate(129deg);
 }
-.circle-clipper.right .circle {
+.circle-clipper.right .circle, .circle-clipper.right .comments-list li.comment > .comment-body > .reply, .comments-list .circle-clipper.right li.comment > .comment-body > .reply {
   left: -100%;
   border-left-color: transparent !important;
   -webkit-transform: rotate(-129deg);
   transform: rotate(-129deg);
 }
 
-.active .circle-clipper.left .circle {
+.active .circle-clipper.left .circle, .active .circle-clipper.left .comments-list li.comment > .comment-body > .reply, .comments-list .active .circle-clipper.left li.comment > .comment-body > .reply {
   /* duration: ARCTIME */
   -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
 
-.active .circle-clipper.right .circle {
+.active .circle-clipper.right .circle, .active .circle-clipper.right .comments-list li.comment > .comment-body > .reply, .comments-list .active .circle-clipper.right li.comment > .comment-body > .reply {
   /* duration: ARCTIME */
   -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
