@@ -6,7 +6,7 @@ if ( have_posts() ):
 		the_post(); ?>
 		<article <?php post_class( is_singular() ? 'card' : 'card hoverable' ); ?>>
 			<?php if ( has_post_thumbnail() ): ?>
-				<div class="card-image entry-featured-image-css-support-coming-soon">
+				<div class="card-image">
 					<a href="<?php echo( esc_url( get_permalink() ) ); ?>">
 					<?php
 					the_post_thumbnail( 'large', array( 'class' => "attachment-large responsive-img" ) );

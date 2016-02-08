@@ -7,14 +7,12 @@
 			</div>
 		</div>
 		<div class="footer-copyright">
-			<div class="container">
-				<p class="black-text">Designed by anli5005; Powered by WordPress</p>
-			</div>
+			<div class="container">Designed by anli5005; Powered by WordPress</div>
 		</div>
 	</footer>
 
 	<?php wp_footer(); ?>
-	
+
 	</body>
-	
+
 </html>

@@ -48,6 +48,8 @@ module.exports = function(grunt) {
                 "js/materialize/character_counter.js",
 								"js/masonry/imagesloaded.pkgd.js",
 								"js/masonry/masonry.pkgd.js",
+								"js/colorthief/color-thief.min.js",
+								"js/color-functions.js",
 								"js/cellulose.js",
              ],
 				dest: "dist/theme-cellulose/js/scripts.js",

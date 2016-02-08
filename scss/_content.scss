@@ -2,13 +2,8 @@ body.single .main p {
   margin-bottom: 1em;
 }
 
-.main > article {
-	margin-bottom: 4em;
-	clear: both;
-}
-
-body.home > .main > article,
-body.home > .main > .sizer {
+body:not(.single) > .main > article,
+body:not(.single) > .main > .sizer {
   width: 40%;
   width: calc( 50% - 5px );
   margin: 0 0 10px 0;
@@ -213,6 +208,30 @@ article.page {
   body.home > .main > .sizer {
     width: 100%;
   }
+}
+
+body.cellulose-full-width > .main {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+
+  & > .card {
+    box-shadow: none;
+    margin: 0;
+
+    & > .card-content {
+      padding: 0;
+    }
+
+    & > .entry-comments {
+      border-top-style: none;
+    }
+  }
+}
+
+body.cellulose-full-width > footer {
+  margin-top: 0;
 }
 
 /* NEWLINE */

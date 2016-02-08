@@ -32,6 +32,11 @@ function tcellulose_add_body_classes( $classes ) {
 	/* if ( tcellulose_header_expanded() ) {
 		$classes[] = "expanded-header";
 	} */
+	if ( is_singular() ) {
+		if ( get_post_meta( get_the_ID(), '_tcellulose_post_layout', true ) == 'fullwidth' ) {
+			$classes[] = 'cellulose-full-width';
+		}
+	}
 	return $classes;
 }
 
@@ -71,6 +76,10 @@ function tcellulose_comment_field_filter( $field ) {
 	return preg_replace( '/<p class="([^"]*)">/', '<p class="$1 input-field">', preg_replace( '/<textarea ([^>]*)>/', '<textarea $1 class="materialize-textarea">', $field ) );
 }
 
+function tcellulose_post_meta_boxes() {
+	add_meta_box( 'tcellulose-post-layout', __( 'Post Layout', 'tcellulose' ), 'tcellulose_post_layout_box', get_post_types( array( 'show_ui' => true, '_builtin' => true ) ), 'side', 'core' );
+}
+
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_styles" );
 add_action( "wp_enqueue_scripts", "tcellulose_enqueue_script" );
 
@@ -90,6 +99,50 @@ add_filter( "comment_form_field_comment", "tcellulose_comment_field_filter", 10,
 add_filter( "comment_form_field_author",  "tcellulose_comment_field_filter", 10, 1 );
 add_filter( "comment_form_field_email",   "tcellulose_comment_field_filter", 10, 1 );
 add_filter( "comment_form_field_url",     "tcellulose_comment_field_filter", 10, 1 );
+
+add_action( 'add_meta_boxes', 'tcellulose_post_meta_boxes' );
+
+// Meta Boxes
+
+function tcellulose_post_layout_box( $post ) { ?>
+
+	<p><?php _e( 'Pick a layout for this post.', 'tcellulose' ); ?></p>
+	<p>
+		<?php $meta_value = get_post_meta( $post->ID, '_tcellulose_post_layout', true ); ?>
+		<select name="tcellulose_post_layout">
+			<option value="default"<?php echo( $meta_value == 'normal' ? ' selected' : '' ); ?>>Default Layout</option>
+			<option value="fullwidth"<?php echo( $meta_value == 'fullwidth' ? ' selected' : '' ); ?>>Full Width Layout</option>
+		</select>
+		<?php wp_nonce_field( 'tcellulose_post_layout', 'tcellulose_post_layout_nonce' ); ?>
+	</p>
+
+<?php }
+function tcellulose_save_post_layout( $post_id, $post ) {
+	if ( ! isset( $_POST['tcellulose_post_layout'] ) ) {
+		return $post_id;
+	}
+	if ( ! ( isset( $_POST['tcellulose_post_layout_nonce'] ) || wp_verify_nonce( $_POST['tcellulose_post_layout_nonce'], 'tcellulose_post_layout' ) ) ) {
+		return $post_id;
+	}
+	if ( ! current_user_can( get_post_type_object( $post->post_type )->cap->edit_post, $post_id ) ) {
+		return $post_id;
+	}
+	$new_value = $_POST['tcellulose_post_layout'];
+	$meta_key  = '_tcellulose_post_layout';
+	$meta_val  = get_post_meta( $post_id, $meta_key, true );
+
+	if ( $new_value == $meta_val ) {
+		return $post_id;
+	}
+
+	if ( $meta_val == '' ) {
+		add_post_meta( $post_id, $meta_key, $new_value, true );
+	} else {
+		update_post_meta( $post_id, $meta_key, $new_value );
+	}
+
+}
+add_action( 'save_post', 'tcellulose_save_post_layout', 10, 2 );
 
 // Color Manipulation Functions
 
@@ -163,6 +216,17 @@ function tcellulose_customize_register( $wp_customize ) {
 			'deep-orange' => __( 'Deep Orange', 'tcellulose' )
 		)
 	) ) );
+
+	// Logo
+	$wp_customize->add_setting( 'tcellulose_header_logo', array(
+		'default' => '',
+		'transport' => $default_transport
+	) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'tcellulose_header_logo', array(
+		'label'    => __( 'Logo', 'tcellulose' ),
+		'settings' => 'tcellulose_header_logo',
+		'section'  => 'title_tagline'
+	) ) );
 }
 
 function tcellulose_customize_css() {
@@ -193,10 +257,12 @@ function tcellulose_customize_css() {
 	?>
 	<style>
 	<?php echo( "/* Accent Color: $accent_option */\n" ); ?>
+	<?php echo( "/* Image:        " . get_theme_mod( 'tcellulose_header_logo' ) . " */\n" ); ?>
 
 	.site-header,
 	.site-header a,
-	footer.page-footer {
+	footer.page-footer,
+	footer.page-footer a {
 		background-color: <?php echo( get_theme_mod( 'tcellulose_primary_color' ) ); ?>;
 		color: <?php echo( tcellulose_rgb_brightness( tcellulose_hex_to_rgb( get_theme_mod( 'tcellulose_primary_color' ) ) ) > $light_threshold ? 'black' : 'white' ); ?>;
 	}
@@ -222,6 +288,19 @@ function tcellulose_customize_css() {
 	.entry-comments .submit:hover {
 		background-color: <?php echo( $accent_color[1] ); ?>;
 	}
+
+	<?php if ( ! empty( get_theme_mod( 'tcellulose_header_logo' ) ) ): ?>
+	.site-title a {
+		color: transparent;
+		background-color: transparent;
+		background-image: url('<?php echo( esc_url( get_theme_mod( 'tcellulose_header_logo' ) ) ); ?>');
+		background-repeat: no-repeat;
+		background-size: contain;
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+	<?php endif; ?>
 	</style>
 <?php }
 

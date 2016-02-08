@@ -1,0 +1,18 @@
+.entry-content img {
+  display: block;
+}
+
+.entry-content .wp-caption .wp-caption-text {
+  background-color: #E0E0E0;
+  color: rgba(0, 0, 0, 0.54);
+  width: 100%;
+  padding: 16px;
+
+  a {
+    color: rgba(0, 0, 0, 0.46);
+  }
+}
+
+.entry-content .wp-caption img {
+  width: 100%;
+}
