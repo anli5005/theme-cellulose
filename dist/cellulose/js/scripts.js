@@ -10415,6 +10415,8 @@ function brightness( rgb ) {
 }
 
 (function($) {
+  var $grid;
+
   // Featured image clipping function
   function clipFeaturedImages() {
     $( '.post.has-post-thumbnail > .card-image' ).each(function() {
@@ -10444,10 +10446,10 @@ function brightness( rgb ) {
   function clipChips( selector ) {
     $( selector ).find( '.placeholder-chip' ).remove();
     $( selector ).each(function() {
-      var $allChips     = $( this ).find( '.chip' ).removeClass( 'clipped-chip screen-reader-only' );
+      var $allChips     = $( this ).find( '.chip' ).removeClass( 'clipped-chip screen-reader-text' );
       var $clippedChips = $( this ).find( '.chip' ).filter(function( index ) {
         return $allChips.eq( 0 ).position().top != $allChips.eq( index < $allChips.size() - 1 ? index + 1 : index ).position().top;
-      }).addClass( 'clipped-chip screen-reader-only' );
+      }).addClass( 'clipped-chip screen-reader-text' );
       if ( $clippedChips.size() > 0 ) {
         var $placeholder = $( '<span class="chip placeholder-chip" aria-hidden="true"></span>' ).text( $clippedChips.size() ).appendTo( $( this ) );
         $placeholder.prepend( $( '<span class="material-icons">more_horiz</span>' ) );
@@ -10459,6 +10461,10 @@ function brightness( rgb ) {
           }
         });
         $placeholder.attr( 'data-tooltip', tooltip ).tooltip({delay: 0, position: 'bottom'});
+        $placeholder.click(function() {
+          $( this ).parent().find( '.clipped-chip' ).toggleClass( 'screen-reader-text' ).end().end().find( '.material-icons' ).text( $( this ).parent().find( '.clipped-chip' ).hasClass( 'screen-reader-text' ) ? 'more_horiz' : 'chevron_left' );
+          $( 'body:not(.single) > .main' ).masonry( 'layout' );
+        });
       }
     });
     $( 'body:not(.single) > .main' ).masonry( 'layout' );
@@ -10471,7 +10477,7 @@ function brightness( rgb ) {
     // Setup Masonry grid
     $( 'body:not(.single) > .main' ).append( $( '<div class="sizer"></div>' ) );
     if ( ! ( $( 'body' ).hasClass( 'single' ) ) ) {
-      var $grid = $( 'body > .main' );
+      $grid = $( 'body > .main' );
       $grid.masonry({
         itemSelector: 'article.card, div.cellulose-pagination',
         columnWidth: 'body > .main > .sizer',
@@ -10502,10 +10508,21 @@ function brightness( rgb ) {
     $( window ).resize(function() {
       clipChips( chipSelector );
     });
+
+    // Paginate tabs
+    // TODO: Only show this when tabs overflow
+    var $left  = $( '<li><i class="material-icons"></i></li>' ).css({position: 'absolute', top: 0, height: '100%', display: 'block'});
+    var $right = $left.clone();
+    $left.find( '.material-icons' ).text( 'chevron_left' ).end().click(function() {
+      $( this ).parent().scrollLeft( $( this ).parent().scrollLeft() - ( 0.5 * $( window ).width() ) );
+    }).css( 'left', 0 ).prependTo( $( 'body > header > nav > ul' ) );
+    $right.find( '.material-icons' ).text( 'chevron_right' ).end().click(function() {
+      $( this ).parent().scrollLeft( $( this ).parent().scrollLeft() + ( 0.5 * $( window ).width() ) );
+    }).css( 'right', 0 ).appendTo( $( 'body > header > nav > ul' ) );
   });
 
   $( window ).load(function() {
     var chipSelector = '.entry-taxonomies > div';
     clipChips( chipSelector );
-  })
+  });
 })(jQuery);

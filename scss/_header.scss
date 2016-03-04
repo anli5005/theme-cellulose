@@ -45,6 +45,10 @@
   }
 }
 
+.site-navigation {
+  position: relative;
+}
+
 .site-navigation,
 .site-navigation > ul {
   margin-bottom: 0;
@@ -55,6 +59,15 @@
 .site-navigation > ul {
   overflow-x: scroll;
   overflow-y: hidden;
+
+  padding-left: 24px;
+  padding-right: 24px;
+
+  .material-icons {
+    display: block;
+    width: 24px;
+    height: 100%;
+  }
 }
 
 .site-navigation > ul,
@@ -95,6 +108,7 @@ body.admin-bar .site-header {
 }
 
 @media only screen and (orientation: portrait) and (min-width: 841px), only screen and (orientation: landscape) and (min-width: 961px) {
+  // TODO: Hide tabs if empty on mobile
   .site-header {
 	height: 64px;
 	padding: 0 0 0 24px;
@@ -135,8 +149,7 @@ body.admin-bar .site-header {
 
   .site-title,
   .site-tagline,
-  .page-title,
-  .site-navigation > ul {
+  .page-title {
 	padding-right: 24px;
   }
 
@@ -195,7 +208,7 @@ body.admin-bar .site-header {
   }
 
   .site-navigation > ul {
-  	padding-left: 80px;
+    padding-left: 80px;
   }
 
   .site-navigation > ul > li:hover {

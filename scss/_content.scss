@@ -9,6 +9,10 @@ body:not(.single) > .main > .sizer {
   margin: 0 0 10px 0;
 }
 
+body:not(.single) > .main > article.sticky {
+  width: 100%;
+}
+
 .main article ul > li {
   list-style-type: disc;
 }
@@ -106,6 +110,7 @@ header.entry-details .entry-taxonomies {
 .entry-content {
 	clear: both;
 	word-wrap: break-word;
+  overflow: hidden;
 }
 
 .entry-content .wp-caption,
@@ -172,7 +177,7 @@ article.page {
   }
 
   .says {
-    @extend .screen-reader-only;
+    @extend .screen-reader-text;
   }
 
   .comment-awaiting-moderation {
@@ -204,8 +209,8 @@ article.page {
 }
 
 @media only screen and (max-width: 767px) {
-  body.home > .main > article,
-  body.home > .main > .sizer {
+  body:not(.single) > .main > article,
+  body:not(.single) > .main > .sizer {
     width: 100%;
   }
 }

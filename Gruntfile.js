@@ -3,8 +3,8 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		clean: {
 			dist: ["dist"],
-			css: ["dist/theme-cellulose/style.css", "dist/theme-cellulose/style.min.css"],
-			js: ["dist/theme-cellulose/js"],
+			css: ["dist/cellulose/style.css", "dist/cellulose/style.min.css"],
+			js: ["dist/cellulose/js"],
 		},
 		copy: {
 			php: {
@@ -12,11 +12,11 @@ module.exports = function(grunt) {
 					expand: true,
 					flatten: true,
 					src: "php/**",
-					dest: "dist/theme-cellulose/",
+					dest: "dist/cellulose/",
 					filter: "isFile"
 				}]
-			}
-		},
+			} // TODO:40 Copy readme
+		}, // TODO: Put editor-style.css somewhere else
 		concat: {
 			js: {
 				src: [
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 								"js/color-functions.js",
 								"js/cellulose.js",
              ],
-				dest: "dist/theme-cellulose/js/scripts.js",
+				dest: "dist/cellulose/js/scripts.js",
 			}
 		},
 		sass: {
@@ -62,13 +62,13 @@ module.exports = function(grunt) {
 					style: "expanded"
 				},
 				files: {
-					"dist/theme-cellulose/style.css": "scss/style.scss"
+					"dist/cellulose/style.css": "scss/style.scss"
 				}
 			}
 		},
 		replace: {
 			css: {
-				src: ["dist/theme-cellulose/style.css"],
+				src: ["dist/cellulose/style.css"],
 				overwrite: true,
 				replacements: [{
 					from: "/* NEWLINE */\n",
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
 				}]
 			},
 			js: {
-				src: ["dist/theme-cellulose/js/scripts.js"],
+				src: ["dist/cellulose/js/scripts.js"],
 				overwrite: true,
 				replacements: [{
 					from: /\/\/ Velocity has conflicts when loaded with jQuery, this will check for it[^i]*( |\n)*if[^\}]*( |\n)*\}( |\n)*else[^\}]*\}/,
@@ -102,21 +102,21 @@ module.exports = function(grunt) {
 					browsers: ["last 2 versions"]
 				},
 				files: {
-					"dist/theme-cellulose/style.css": "dist/theme-cellulose/style.css"
+					"dist/cellulose/style.css": "dist/cellulose/style.css"
 				}
 			}
 		},
 		cssmin: {
 			css: {
 				files: {
-					"dist/theme-cellulose/style.min.css": "dist/theme-cellulose/style.css"
+					"dist/cellulose/style.min.css": "dist/cellulose/style.css"
 				}
 			}
 		},
 		uglify: {
 			js: {
 				files: {
-					"dist/theme-cellulose/js/scripts.min.js": "dist/theme-cellulose/js/scripts.js"
+					"dist/cellulose/js/scripts.min.js": "dist/cellulose/js/scripts.js"
 				}
 			}
 		}
@@ -133,7 +133,8 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("css", ["clean:css", "sass:css", "replace:css", "autoprefixer:css", "cssmin:css"]);
 	grunt.registerTask("js", ["clean:js", "concat:js", "replace:js", "uglify:js"]);
-	grunt.registerTask("dist", ["clean:dist", "copy:php", "css", "js"]);
+	grunt.registerTask("php", ["copy:php"]);
+	grunt.registerTask("dist", ["clean:dist", "php", "css", "js"]);
 
 	grunt.registerTask("default", ["dist"]);
 

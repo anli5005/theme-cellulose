@@ -9,10 +9,28 @@
   padding: 16px;
 
   a {
-    color: rgba(0, 0, 0, 0.46);
+    color: rgba(0, 0, 0, 0.4);
   }
 }
 
 .entry-content .wp-caption img {
   width: 100%;
+}
+
+.alignleft, .alignright, .aligncenter {
+  margin-bottom: 1rem;
+}
+
+.alignleft {
+  float: left;
+  margin-right: 1em;
+}
+
+.alignright {
+  float: right;
+  margin-left: 1em;
+}
+
+.aligncenter {
+  margin: 1rem auto 1rem auto;
 }

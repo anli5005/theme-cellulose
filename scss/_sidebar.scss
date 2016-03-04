@@ -1,9 +1,9 @@
-#tcellulose-sidebar {
+#cellulose-sidebar {
   font-size: 14px;
   font-weight: 500;
 }
 
-#tcellulose-sidebar > aside {
+#cellulose-sidebar > aside {
   padding: 0 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
@@ -12,22 +12,24 @@
   }
 }
 
-#tcellulose-sidebar > aside > h5 {
+#cellulose-sidebar > aside > h5 {
   color: rgba(0, 0, 0, 0.54);
   font-weight: normal;
   font-size: 16px;
 }
 
-#tcellulose-sidebar a {
+#cellulose-sidebar a {
   height: auto;
   line-height: 1.5em;
   padding: 0.5em 0;
 }
 
-#tcellulose-sidebar li:hover {
+#cellulose-sidebar li:hover {
   background-color: $sidenav-bg-color;
 }
 
-#tcellulose-sidebar a:hover {
+#cellulose-sidebar a:hover {
   color: $secondary-color;
 }
+
+// TODO: Hide sidebar button when empty

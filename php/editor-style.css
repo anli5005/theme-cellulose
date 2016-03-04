@@ -1,0 +1,21 @@
+body#tinymce.wp-editor {
+  font-family: "Roboto", "Helvetica Neue", "Helvetica", arial, sans-serif;
+}
+
+body#tinymce.wp-editor img {
+  display: block;
+}
+
+body#tinymce.wp-editor .wp-caption .wp-caption-dd {
+  background-color: #E0E0E0;
+  color: rgba(0, 0, 0, 0.54);
+  padding: 16px;
+  font-size: 1em;
+}
+body#tinymce.wp-editor .wp-caption .wp-caption-dd a {
+  color: rgba(0, 0, 0, 0.46);
+}
+
+body#tinymce.wp-editor .wp-caption img {
+  width: 100%;
+}

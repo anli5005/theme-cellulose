@@ -2,9 +2,10 @@
 
 /*
  Theme Name: Cellulose
+ Description: A Material Design theme for WordPress
  Author: anli5005
  Version: 0.1
- Text Domain: tcellulose
+ Text Domain: cellulose
  */
 
 // Variables and mixins
@@ -22,7 +23,7 @@
  * Main Stylesheet
  * Table of Contents
  */
-// TODO: Table of Contents and Section Headers in this file
+// TODO:0 Table of Contents and Section Headers in this file
 
 /* NEWLINE (2) */
 
@@ -54,7 +55,7 @@
 
 @import "searchform";
 
-// TODO: Actually organize this thing
+// TODO:10 Actually organize this thing
 @import "materialize/cards";
 @import "materialize/chips";
 @import "materialize/toast";

@@ -1,8 +1,9 @@
 /*
  Theme Name: Cellulose
+ Description: A Material Design theme for WordPress
  Author: anli5005
  Version: 0.1
- Text Domain: tcellulose
+ Text Domain: cellulose
  */
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important;
@@ -3494,9 +3495,10 @@ small {
 
 body {
   font-family: "Roboto", "Helvetica Neue", "Helvetica", arial, sans-serif;
+  background-color: #FAFAFA;
 }
 
-.screen-reader-only, .comments-list li.comment .says {
+.screen-reader-text, .comments-list li.comment .says {
   position: absolute;
   left: -10000px;
   top: auto;
@@ -6465,6 +6467,10 @@ nav .input-field label.active {
   height: 100%;
 }
 
+.site-navigation {
+  position: relative;
+}
+
 .site-navigation,
 .site-navigation > ul {
   margin-bottom: 0;
@@ -6475,6 +6481,13 @@ nav .input-field label.active {
 .site-navigation > ul {
   overflow-x: scroll;
   overflow-y: hidden;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.site-navigation > ul .material-icons {
+  display: block;
+  width: 24px;
+  height: 100%;
 }
 
 .site-navigation > ul,
@@ -6555,8 +6568,7 @@ body.admin-bar .site-header {
 
   .site-title,
   .site-tagline,
-  .page-title,
-  .site-navigation > ul {
+  .page-title {
     padding-right: 24px;
   }
 
@@ -6677,6 +6689,10 @@ body:not(.single) > .main > .sizer {
   margin: 0 0 10px 0;
 }
 
+body:not(.single) > .main > article.sticky {
+  width: 100%;
+}
+
 .main article ul > li {
   list-style-type: disc;
 }
@@ -6774,6 +6790,7 @@ header.entry-details .entry-taxonomies {
 .entry-content {
   clear: both;
   word-wrap: break-word;
+  overflow: hidden;
 }
 
 .entry-content .wp-caption,
@@ -6855,8 +6872,8 @@ article.page {
 }
 
 @media only screen and (max-width: 767px) {
-  body.home > .main > article,
-  body.home > .main > .sizer {
+  body:not(.single) > .main > article,
+  body:not(.single) > .main > .sizer {
     width: 100%;
   }
 }
@@ -6893,11 +6910,29 @@ body.cellulose-full-width > footer {
   padding: 16px;
 }
 .entry-content .wp-caption .wp-caption-text a {
-  color: rgba(0, 0, 0, 0.46);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .entry-content .wp-caption img {
   width: 100%;
+}
+
+.alignleft, .alignright, .aligncenter {
+  margin-bottom: 1rem;
+}
+
+.alignleft {
+  float: left;
+  margin-right: 1em;
+}
+
+.alignright {
+  float: right;
+  margin-left: 1em;
+}
+
+.aligncenter {
+  margin: 1rem auto 1rem auto;
 }
 
 .cellulose-pagination {
@@ -6955,36 +6990,36 @@ body.cellulose-full-width > footer {
     overflow: hidden;
   }
 }
-#tcellulose-sidebar {
+#cellulose-sidebar {
   font-size: 14px;
   font-weight: 500;
 }
 
-#tcellulose-sidebar > aside {
+#cellulose-sidebar > aside {
   padding: 0 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
-#tcellulose-sidebar > aside:last-child {
+#cellulose-sidebar > aside:last-child {
   border-bottom-width: 0;
 }
 
-#tcellulose-sidebar > aside > h5 {
+#cellulose-sidebar > aside > h5 {
   color: rgba(0, 0, 0, 0.54);
   font-weight: normal;
   font-size: 16px;
 }
 
-#tcellulose-sidebar a {
+#cellulose-sidebar a {
   height: auto;
   line-height: 1.5em;
   padding: 0.5em 0;
 }
 
-#tcellulose-sidebar li:hover {
+#cellulose-sidebar li:hover {
   background-color: #fff;
 }
 
-#tcellulose-sidebar a:hover {
+#cellulose-sidebar a:hover {
   color: #3d5afe;
 }
 
@@ -7022,6 +7057,8 @@ body .search-form {
   border-bottom-width: 0;
   height: 1.5em;
   margin-bottom: 0;
+  color: black;
+  font-weight: normal;
 }
 
 form.search-form input.search-field:focus {
