@@ -7,7 +7,7 @@ function cellulose_esc_color( $color ) {
 function cellulose_enqueue_styles() {
 	wp_enqueue_style( "roboto", "//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic" );
 	wp_enqueue_style( "material-icons", "//fonts.googleapis.com/icon?family=Material+Icons" );
-	wp_enqueue_style( "cellulose-styles", get_stylesheet_uri() );
+	wp_enqueue_style( "cellulose-styles", get_template_directory_uri() . "/style.min.css" );
 }
 
 function cellulose_enqueue_script() {
@@ -31,6 +31,7 @@ function cellulose_add_body_classes( $classes ) {
 		$classes[] = "expanded-header";
 	} */
 	if ( is_singular() ) {
+		$classes[] = 'singular';
 		if ( get_post_meta( get_the_ID(), '_cellulose_post_layout', true ) == 'fullwidth' ) {
 			$classes[] = 'cellulose-full-width';
 		}
@@ -283,7 +284,8 @@ function cellulose_customize_css() {
 		color: <?php echo( cellulose_rgb_brightness( cellulose_hex_to_rgb( get_theme_mod( 'cellulose_primary_color' ) ) ) > $light_threshold ? 'black' : 'white' ); ?>;
 	}
 
-	a {
+	a,
+	.comments-list li.comment .comment-metadata .comment-edit-link {
 		color: <?php echo( $accent_color[3] ); ?>;
 	}
 
@@ -296,6 +298,10 @@ function cellulose_customize_css() {
 	.pagination > li.active > a {
 		background-color: <?php echo( $accent_color[2] ); ?>;
 		color: <?php echo( cellulose_rgb_brightness( cellulose_hex_to_rgb( $accent_color[2] ) ) > $light_threshold ? 'black' : 'white' ); ?>;
+	}
+
+	.comments-list li.comment.bypostauthor .comment-author > img {
+		border-color: <?php echo( $accent_color[2] ); ?>;
 	}
 
 	.btn:hover,

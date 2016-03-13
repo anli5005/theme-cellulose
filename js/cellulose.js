@@ -21,7 +21,7 @@
         $image.height( maxHeight )
       }
     });
-    if ( ! ( $( 'body' ).hasClass( 'single' ) ) ) {
+    if ( ! ( $( 'body' ).hasClass( 'singular' ) ) ) {
       $grid.masonry( 'layout' );
     }
   }
@@ -47,22 +47,24 @@
         $placeholder.attr( 'data-tooltip', tooltip ).tooltip({delay: 0, position: 'bottom'});
         $placeholder.click(function() {
           $( this ).parent().find( '.clipped-chip' ).toggleClass( 'screen-reader-text' ).end().end().find( '.material-icons' ).text( $( this ).parent().find( '.clipped-chip' ).hasClass( 'screen-reader-text' ) ? 'more_horiz' : 'chevron_left' );
-          $( 'body:not(.single) > .main' ).masonry( 'layout' );
+          $( 'body:not(.singular) > .main' ).masonry( 'layout' );
         });
       }
     });
-    $( 'body:not(.single) > .main' ).masonry( 'layout' );
+    $( 'body:not(.singular) > .main' ).masonry( 'layout' );
   }
 
   $(function() {
     // Setup Materialize Side Navs
+    $( '.sidebar-trigger[data-activates="cellulose-sidebar"]' ).attr( 'href', '#' );
+    $( '#cellulose-sidebar' ).css( 'transition', 'none' );
+    $( 'a#sidenav-overlay' ).remove();
     $( '.sidebar-trigger' ).sideNav();
 
     // Setup Masonry grid
-    $( 'body:not(.single) > .main' ).append( $( '<div class="sizer"></div>' ) );
-    if ( ! ( $( 'body' ).hasClass( 'single' ) ) ) {
-      $grid = $( 'body > .main' );
-      $grid.masonry({
+    $( 'body' ).not( '.singular' ).children( '.main' ).append( $( '<div class="sizer"></div>' ) );
+    if ( ! ( $( 'body' ).hasClass( 'singular' ) ) ) {
+      $grid = $( 'body > .main' ).addClass( 'masonry-grid' ).masonry({
         itemSelector: 'article.card, div.cellulose-pagination',
         columnWidth: 'body > .main > .sizer',
         percentPosition: true,
@@ -72,6 +74,13 @@
         $grid.masonry( 'layout' );
       })
     }
+    $( '.entry-content .gallery .gallery-item' ).each(function() {
+      $( this ).width( $( this ).find( 'img' ).width() ).find( 'img' ).width( '100%' ); // HACK:0 Refactor gallery styles
+      // TODO: Gallery captions are not responsive
+    });
+    $( '.entry-content .gallery' ).children( 'br' ).remove().end().masonry({
+      gutter: 10
+    });
 
     // Colorize captions
     $( '.wp-caption' ).imagesLoaded().progress(function( instance, image ) {
@@ -82,6 +91,15 @@
       var linkColor  = isLight ? 'rgba(0, 0, 0, 0.46)' : 'rgba(255, 255, 255, 0.5)';
       $( image.img ).parent().siblings( '.wp-caption-text' ).css( 'background-color', rgbtohex( background ) ).css( 'color', textColor ).find( 'a' ).css( 'color', linkColor );
     });
+    $( '.gallery-icon' ).imagesLoaded().progress(function( instance, image ) {
+      $( '.entry-content .gallery' ).masonry( 'layout' );
+      var colorThief = new ColorThief();
+      var background = colorThief.getColor( image.img );
+      var isLight    = brightness( background ) > 170;
+      var textColor  = isLight ? 'rgba(0, 0, 0, 0.54)' : 'rgba(255, 255, 255, 0.7)';
+      var linkColor  = isLight ? 'rgba(0, 0, 0, 0.46)' : 'rgba(255, 255, 255, 0.5)';
+      $( image.img ).parent().parent().siblings( '.wp-caption-text' ).css( 'background-color', rgbtohex( background ) ).css( 'color', textColor ).find( 'a' ).css( 'color', linkColor );
+    }); // TODO: Refactor this, because why not?
 
     $( window ).resize( clipFeaturedImages );
     $( '.post.has-post-thumbnail > .card-image img' ).imagesLoaded().progress(function( instance, image ) {

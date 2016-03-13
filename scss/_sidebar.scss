@@ -1,6 +1,7 @@
 #cellulose-sidebar {
   font-size: 14px;
   font-weight: 500;
+  transition: left 0.3s ease;
 }
 
 #cellulose-sidebar > aside {
@@ -30,6 +31,21 @@
 
 #cellulose-sidebar a:hover {
   color: $secondary-color;
+}
+
+a#sidenav-overlay {
+  display: none;
+  opacity: 0;
+  cursor: default;
+}
+
+#cellulose-sidebar:target {
+  left: 0;
+
+  & + a#sidenav-overlay {
+    display: block;
+    opacity: 1;
+  }
 }
 
 // TODO: Hide sidebar button when empty

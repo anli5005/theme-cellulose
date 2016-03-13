@@ -587,7 +587,7 @@ function ImagesLoaded( elem, options, onAlways ) {
     this.jqDeferred = new $.Deferred();
   }
 
-  // HACK check async to allow time to bind listeners
+  // HACK:30 check async to allow time to bind listeners
   setTimeout( function() {
     this.check();
   }.bind( this ));
@@ -688,7 +688,7 @@ ImagesLoaded.prototype.check = function() {
   }
 
   function onProgress( image, elem, message ) {
-    // HACK - Chrome triggers event before object properties have changed. #83
+    // HACK:10 - Chrome triggers event before object properties have changed. #83
     setTimeout( function() {
       _this.progress( image, elem, message );
     });

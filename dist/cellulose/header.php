@@ -10,7 +10,9 @@
 
 		<header class="site-header">
 
-			<a href="#" data-activates="cellulose-sidebar" class="sidebar-trigger"><i class="material-icons">menu</i></a>
+			<?php if ( is_active_sidebar( 'cellulose-sidebar' ) ): ?>
+				<a href="#cellulose-sidebar" data-activates="cellulose-sidebar" class="sidebar-trigger"><i class="material-icons">menu</i></a>
+			<?php endif; ?>
 
 			<<?php echo( is_front_page() ? 'h1' : 'p' ); ?> class="site-title">
 				<a href="<?php echo( esc_url( home_url( '/', 'relative' ) ) ); ?>">

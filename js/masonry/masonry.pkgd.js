@@ -1835,14 +1835,14 @@ var transitionProps = 'opacity,' +
   toDashedAll( vendorProperties.transform || 'transform' );
 
 Item.prototype.enableTransition = function(/* style */) {
-  // HACK changing transitionProperty during a transition
+  // HACK:20 changing transitionProperty during a transition
   // will cause transition to jump
   if ( this.isTransitioning ) {
     return;
   }
 
   // make `transition: foo, bar, baz` from style object
-  // HACK un-comment this when enableTransition can work
+  // HACK:40 un-comment this when enableTransition can work
   // while a transition is happening
   // var transitionValues = [];
   // for ( var prop in style ) {

@@ -1,15 +1,17 @@
-body.single .main p {
+// TODO: Author about section
+
+body.singular .main p {
   margin-bottom: 1em;
 }
 
-body:not(.single) > .main > article,
-body:not(.single) > .main > .sizer {
+body > .main.masonry-grid > article,
+body > .main.masonry-grid > .sizer {
   width: 40%;
   width: calc( 50% - 5px );
   margin: 0 0 10px 0;
 }
 
-body:not(.single) > .main > article.sticky {
+body > .main.masonry-grid > article.sticky {
   width: 100%;
 }
 
@@ -90,7 +92,7 @@ header.entry-details .entry-author {
   margin-right: 1em;
 }
 
-body.single .main .entry-author p {
+body.singular .main .entry-author p {
   margin-bottom: 0;
 }
 
@@ -107,7 +109,8 @@ header.entry-details .entry-taxonomies {
   vertical-align: -30%;
 }
 
-.entry-content {
+.entry-content,
+.entry-comments {
 	clear: both;
 	word-wrap: break-word;
   overflow: hidden;
@@ -117,10 +120,6 @@ header.entry-details .entry-taxonomies {
 .entry-content img, {
 	max-width: 100%;
 	height: auto;
-}
-
-article.page {
-	margin-top: 4em;
 }
 
 .entry-comments {
@@ -172,6 +171,11 @@ article.page {
     margin-bottom: 0.5em;
   }
 
+  &.bypostauthor > article .comment-author > img {
+    border-width: 3px;
+    border-style: solid;
+  }
+
   .comment-content {
     clear: both;
   }
@@ -205,13 +209,24 @@ article.page {
     &:hover {
       background-color: #BDBDBD;
     }
+
+    a {
+      display: block;
+    }
   }
 }
 
 @media only screen and (max-width: 767px) {
-  body:not(.single) > .main > article,
-  body:not(.single) > .main > .sizer {
+  body > .main.masonry-grid > article,
+  body > .main.masonry-grid > .sizer {
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .comments-list li.comment .comment-metadata {
+    display: block;
+    max-width: 17rem;
   }
 }
 

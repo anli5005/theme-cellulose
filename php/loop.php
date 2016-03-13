@@ -1,5 +1,5 @@
 <div class="container main" id="content">
-<?php
+<?php // TODO: Titles for search and author pages
 if ( have_posts() ):
 
 	while ( have_posts() ):
@@ -25,7 +25,7 @@ if ( have_posts() ):
 					<?php get_template_part( "entry-details" ); ?>
 					</header>
 					<div class="entry-content">
-						<?php is_singular() ? the_content() : the_excerpt(); ?>
+						<?php is_singular() ? ( the_content() || wp_link_pages() ) : the_excerpt(); // TODO: Beautify wp_link_pages output ?>
 					</div>
 				</div>
 				<?php comments_template(); ?>

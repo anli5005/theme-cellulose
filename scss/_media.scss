@@ -2,7 +2,8 @@
   display: block;
 }
 
-.entry-content .wp-caption .wp-caption-text {
+.entry-content .wp-caption .wp-caption-text,
+.gallery-caption {
   background-color: #E0E0E0;
   color: rgba(0, 0, 0, 0.54);
   width: 100%;
@@ -33,4 +34,14 @@
 
 .aligncenter {
   margin: 1rem auto 1rem auto;
+}
+
+.entry-content .gallery .gallery-item {
+  float: none !important; // TODO: Refactor these "!important"s
+  margin-top: 0 !important;
+  margin-bottom: 10px;
+
+  img {
+    border: none !important;
+  }
 }

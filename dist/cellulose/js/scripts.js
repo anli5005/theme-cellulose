@@ -6923,7 +6923,7 @@ function ImagesLoaded( elem, options, onAlways ) {
     this.jqDeferred = new $.Deferred();
   }
 
-  // HACK check async to allow time to bind listeners
+  // HACK:30 check async to allow time to bind listeners
   setTimeout( function() {
     this.check();
   }.bind( this ));
@@ -7024,7 +7024,7 @@ ImagesLoaded.prototype.check = function() {
   }
 
   function onProgress( image, elem, message ) {
-    // HACK - Chrome triggers event before object properties have changed. #83
+    // HACK:10 - Chrome triggers event before object properties have changed. #83
     setTimeout( function() {
       _this.progress( image, elem, message );
     });
@@ -9024,14 +9024,14 @@ var transitionProps = 'opacity,' +
   toDashedAll( vendorProperties.transform || 'transform' );
 
 Item.prototype.enableTransition = function(/* style */) {
-  // HACK changing transitionProperty during a transition
+  // HACK:20 changing transitionProperty during a transition
   // will cause transition to jump
   if ( this.isTransitioning ) {
     return;
   }
 
   // make `transition: foo, bar, baz` from style object
-  // HACK un-comment this when enableTransition can work
+  // HACK:40 un-comment this when enableTransition can work
   // while a transition is happening
   // var transitionValues = [];
   // for ( var prop in style ) {
@@ -10437,7 +10437,7 @@ function brightness( rgb ) {
         $image.height( maxHeight )
       }
     });
-    if ( ! ( $( 'body' ).hasClass( 'single' ) ) ) {
+    if ( ! ( $( 'body' ).hasClass( 'singular' ) ) ) {
       $grid.masonry( 'layout' );
     }
   }
@@ -10463,22 +10463,24 @@ function brightness( rgb ) {
         $placeholder.attr( 'data-tooltip', tooltip ).tooltip({delay: 0, position: 'bottom'});
         $placeholder.click(function() {
           $( this ).parent().find( '.clipped-chip' ).toggleClass( 'screen-reader-text' ).end().end().find( '.material-icons' ).text( $( this ).parent().find( '.clipped-chip' ).hasClass( 'screen-reader-text' ) ? 'more_horiz' : 'chevron_left' );
-          $( 'body:not(.single) > .main' ).masonry( 'layout' );
+          $( 'body:not(.singular) > .main' ).masonry( 'layout' );
         });
       }
     });
-    $( 'body:not(.single) > .main' ).masonry( 'layout' );
+    $( 'body:not(.singular) > .main' ).masonry( 'layout' );
   }
 
   $(function() {
     // Setup Materialize Side Navs
+    $( '.sidebar-trigger[data-activates="cellulose-sidebar"]' ).attr( 'href', '#' );
+    $( '#cellulose-sidebar' ).css( 'transition', 'none' );
+    $( 'a#sidenav-overlay' ).remove();
     $( '.sidebar-trigger' ).sideNav();
 
     // Setup Masonry grid
-    $( 'body:not(.single) > .main' ).append( $( '<div class="sizer"></div>' ) );
-    if ( ! ( $( 'body' ).hasClass( 'single' ) ) ) {
-      $grid = $( 'body > .main' );
-      $grid.masonry({
+    $( 'body' ).not( '.singular' ).children( '.main' ).append( $( '<div class="sizer"></div>' ) );
+    if ( ! ( $( 'body' ).hasClass( 'singular' ) ) ) {
+      $grid = $( 'body > .main' ).addClass( 'masonry-grid' ).masonry({
         itemSelector: 'article.card, div.cellulose-pagination',
         columnWidth: 'body > .main > .sizer',
         percentPosition: true,
@@ -10488,6 +10490,13 @@ function brightness( rgb ) {
         $grid.masonry( 'layout' );
       })
     }
+    $( '.entry-content .gallery .gallery-item' ).each(function() {
+      $( this ).width( $( this ).find( 'img' ).width() ).find( 'img' ).width( '100%' ); // HACK:0 Refactor gallery styles
+      // TODO: Gallery captions are not responsive
+    });
+    $( '.entry-content .gallery' ).children( 'br' ).remove().end().masonry({
+      gutter: 10
+    });
 
     // Colorize captions
     $( '.wp-caption' ).imagesLoaded().progress(function( instance, image ) {
@@ -10498,6 +10507,15 @@ function brightness( rgb ) {
       var linkColor  = isLight ? 'rgba(0, 0, 0, 0.46)' : 'rgba(255, 255, 255, 0.5)';
       $( image.img ).parent().siblings( '.wp-caption-text' ).css( 'background-color', rgbtohex( background ) ).css( 'color', textColor ).find( 'a' ).css( 'color', linkColor );
     });
+    $( '.gallery-icon' ).imagesLoaded().progress(function( instance, image ) {
+      $( '.entry-content .gallery' ).masonry( 'layout' );
+      var colorThief = new ColorThief();
+      var background = colorThief.getColor( image.img );
+      var isLight    = brightness( background ) > 170;
+      var textColor  = isLight ? 'rgba(0, 0, 0, 0.54)' : 'rgba(255, 255, 255, 0.7)';
+      var linkColor  = isLight ? 'rgba(0, 0, 0, 0.46)' : 'rgba(255, 255, 255, 0.5)';
+      $( image.img ).parent().parent().siblings( '.wp-caption-text' ).css( 'background-color', rgbtohex( background ) ).css( 'color', textColor ).find( 'a' ).css( 'color', linkColor );
+    }); // TODO: Refactor this, because why not?
 
     $( window ).resize( clipFeaturedImages );
     $( '.post.has-post-thumbnail > .card-image img' ).imagesLoaded().progress(function( instance, image ) {
