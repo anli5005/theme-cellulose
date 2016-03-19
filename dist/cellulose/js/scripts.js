@@ -10437,7 +10437,7 @@ function brightness( rgb ) {
         $image.height( maxHeight )
       }
     });
-    if ( ! ( $( 'body' ).hasClass( 'singular' ) ) ) {
+    if ( $( 'body' ).hasClass( 'masonry' ) ) {
       $grid.masonry( 'layout' );
     }
   }
@@ -10463,11 +10463,11 @@ function brightness( rgb ) {
         $placeholder.attr( 'data-tooltip', tooltip ).tooltip({delay: 0, position: 'bottom'});
         $placeholder.click(function() {
           $( this ).parent().find( '.clipped-chip' ).toggleClass( 'screen-reader-text' ).end().end().find( '.material-icons' ).text( $( this ).parent().find( '.clipped-chip' ).hasClass( 'screen-reader-text' ) ? 'more_horiz' : 'chevron_left' );
-          $( 'body:not(.singular) > .main' ).masonry( 'layout' );
+          $( 'body.masonry > .main' ).masonry( 'layout' );
         });
       }
     });
-    $( 'body:not(.singular) > .main' ).masonry( 'layout' );
+    $( 'body.masonry > .main' ).masonry( 'layout' );
   }
 
   $(function() {
@@ -10478,8 +10478,8 @@ function brightness( rgb ) {
     $( '.sidebar-trigger' ).sideNav();
 
     // Setup Masonry grid
-    $( 'body' ).not( '.singular' ).children( '.main' ).append( $( '<div class="sizer"></div>' ) );
-    if ( ! ( $( 'body' ).hasClass( 'singular' ) ) ) {
+    $( 'body.masonry' ).children( '.main' ).append( $( '<div class="sizer"></div>' ) );
+    if ( $( 'body' ).hasClass( 'masonry' ) ) {
       $grid = $( 'body > .main' ).addClass( 'masonry-grid' ).masonry({
         itemSelector: 'article.card, div.cellulose-pagination',
         columnWidth: 'body > .main > .sizer',
@@ -10522,8 +10522,8 @@ function brightness( rgb ) {
       clipFeaturedImages();
     });
 
-    var chipSelector = '.entry-taxonomies > div';
-    $( window ).resize(function() {
+    var chipSelector = 'body:not(.chip-clipping-off) .entry-taxonomies > div';
+    $( chipSelector ).resize(function() {
       clipChips( chipSelector );
     });
 
@@ -10540,7 +10540,7 @@ function brightness( rgb ) {
   });
 
   $( window ).load(function() {
-    var chipSelector = '.entry-taxonomies > div';
+    var chipSelector = 'body:not(.chip-clipping-off) .entry-taxonomies > div';
     clipChips( chipSelector );
   });
 })(jQuery);
