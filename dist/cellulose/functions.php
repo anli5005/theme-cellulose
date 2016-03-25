@@ -1,7 +1,36 @@
 <?php
 
+function cellulose_accent_colors() {
+	return array( // Taken from Material Design
+		'red'         => array( '#FF8A80', '#FF5252', '#FF1744', '#D50000' ),
+		'pink'        => array( '#FF80AB', '#FF4081', '#F50057', '#C51162' ),
+		'purple'      => array( '#EA80FC', '#E040FB', '#D500F9', '#D500F9' ),
+		'deep-purple' => array( '#B388FF', '#7C4DFF', '#651FFF', '#6200EA' ),
+		'indigo'      => array( '#8C9EFF', '#536DFE', '#3D5AFE', '#304FFE' ),
+		'blue'        => array( '#82B1FF', '#448AFF', '#2979FF', '#2962FF' ),
+		'light-blue'  => array( '#80D8FF', '#40C4FF', '#00B0FF', '#0091EA' ),
+		'cyan'        => array( '#84FFFF', '#18FFFF', '#00E5FF', '#00B8D4' ),
+		'teal'        => array( '#A7FFEB', '#64FFDA', '#1DE9B6', '#00BFA5' ),
+		'green'       => array( '#B9F6CA', '#69F0AE', '#00E676', '#00C853' ),
+		'light-green' => array( '#CCFF90', '#B2FF59', '#76FF03', '#64DD17' ),
+		'lime'        => array( '#F4FF81', '#EEFF41', '#C6FF00', '#AEEA00' ),
+		'yellow'      => array( '#FFFF8D', '#FFFF00', '#FFEA00', '#FFD600' ),
+		'amber'       => array( '#FFE57F', '#FFD740', '#FFC400', '#FFAB00' ),
+		'orange'      => array( '#FFD180', '#FFAB40', '#FF9100', '#FF6D00' ),
+		'deep-orange' => array( '#FF9E80', '#FF6E40', '#FF3D00', '#DD2C00' )
+	);
+}
+
 function cellulose_esc_color( $color ) {
 	return preg_replace( '/[^a-fA-F#0-9]/', '', $color );
+}
+
+function cellulose_verify_accent_color( $color ) {
+	return array_key_exists( $color, cellulose_accent_colors );
+}
+
+function cellulose_esc_accent_color( $color ) {
+	return cellulose_verify_accent_color( $color ) ? $color : 'indigo';
 }
 
 function cellulose_enqueue_styles() {
@@ -35,6 +64,13 @@ function cellulose_add_body_classes( $classes ) {
 		if ( get_post_meta( get_the_ID(), '_cellulose_post_layout', true ) == 'fullwidth' ) {
 			$classes[] = 'cellulose-full-width';
 		}
+	} else {
+		if ( ! empty( get_theme_mod( 'cellulose_use_grid_layout' ) ) ) {
+			$classes[] = 'masonry';
+		}
+	}
+	if ( empty( get_theme_mod( 'cellulose_truncate_taxonomies' ) ) ) {
+		$classes[] = 'chip-clipping-off';
 	}
 	return $classes;
 }
@@ -209,7 +245,7 @@ function cellulose_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'cellulose_accent_color', array(
 		'default' => 'indigo',
 		'transport' => $default_transport,
-		'sanitize_callback' => 'esc_html'
+		'sanitize_callback' => 'cellulose_esc_accent_color'
 	) );
 	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'cellulose_accent_color', array(
 		'label'    => __( 'Accent Color', 'cellulose' ),
@@ -247,27 +283,38 @@ function cellulose_customize_register( $wp_customize ) {
 		'settings' => 'cellulose_header_logo',
 		'section'  => 'title_tagline'
 	) ) );
+
+	// Layout
+	$wp_customize->add_section( 'cellulose_layout_settings',  array(
+		'title'    => __( 'Layout', 'cellulose' ),
+		'priority' => 30
+	) );
+	$wp_customize->add_setting( 'cellulose_truncate_taxonomies', array(
+		'default' => '1',
+		'transport' => $default_transport,
+		'sanitize_callback' => 'esc_attr'
+	) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'cellulose_truncate_taxonomies', array(
+		'label'    => __( 'Truncate tags and categories', 'cellulose' ),
+		'type'     => 'checkbox',
+		'settings' => 'cellulose_truncate_taxonomies',
+		'section'  => 'cellulose_layout_settings'
+	) ) );
+	$wp_customize->add_setting( 'cellulose_use_grid_layout', array(
+		'default' => '1',
+		'transport' => $default_transport,
+		'sanitize_callback' => 'esc_attr'
+	) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'cellulose_use_grid_layout', array(
+		'label'    => __( 'Use grid layout for blog posts', 'cellulose' ),
+		'type'     => 'checkbox',
+		'settings' => 'cellulose_use_grid_layout',
+		'section'  => 'cellulose_layout_settings'
+	) ) );
 }
 
 function cellulose_customize_css() {
-	$accent_colors = array( // Taken from Material Design
-		'red'         => array( '#FF8A80', '#FF5252', '#FF1744', '#D50000' ),
-		'pink'        => array( '#FF80AB', '#FF4081', '#F50057', '#C51162' ),
-		'purple'      => array( '#EA80FC', '#E040FB', '#D500F9', '#D500F9' ),
-		'deep-purple' => array( '#B388FF', '#7C4DFF', '#651FFF', '#6200EA' ),
-		'indigo'      => array( '#8C9EFF', '#536DFE', '#3D5AFE', '#304FFE' ),
-		'blue'        => array( '#82B1FF', '#448AFF', '#2979FF', '#2962FF' ),
-		'light-blue'  => array( '#80D8FF', '#40C4FF', '#00B0FF', '#0091EA' ),
-		'cyan'        => array( '#84FFFF', '#18FFFF', '#00E5FF', '#00B8D4' ),
-		'teal'        => array( '#A7FFEB', '#64FFDA', '#1DE9B6', '#00BFA5' ),
-		'green'       => array( '#B9F6CA', '#69F0AE', '#00E676', '#00C853' ),
-		'light-green' => array( '#CCFF90', '#B2FF59', '#76FF03', '#64DD17' ),
-		'lime'        => array( '#F4FF81', '#EEFF41', '#C6FF00', '#AEEA00' ),
-		'yellow'      => array( '#FFFF8D', '#FFFF00', '#FFEA00', '#FFD600' ),
-		'amber'       => array( '#FFE57F', '#FFD740', '#FFC400', '#FFAB00' ),
-		'orange'      => array( '#FFD180', '#FFAB40', '#FF9100', '#FF6D00' ),
-		'deep-orange' => array( '#FF9E80', '#FF6E40', '#FF3D00', '#DD2C00' )
-	);
+	$accent_colors = cellulose_accent_colors();
 	$accent_color = $accent_colors['indigo'];
 	$accent_option = get_theme_mod( 'cellulose_accent_color' );
 	if ( ( gettype( $accent_option ) == 'string' ) && array_key_exists( $accent_option, $accent_colors ) ) {

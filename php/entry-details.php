@@ -13,7 +13,7 @@
 		<?php
 			$tags = get_the_tags();
 			foreach ( $tags as $k => $tag ) {
-				echo( '<a href="' . esc_url( get_tag_link( $tag->term_id ) ) . '" class="' . esc_attr( $tag->slug ) . ' chip"><span class="material-icons" aria-hidden="true">local_offer</span> ' . esc_html( $tag->name ) . '</a>' );
+				echo( '<a href="' . esc_url( get_tag_link( $tag->term_id ) ) . '" class="chip"><span class="material-icons" aria-hidden="true">local_offer</span> ' . esc_html( $tag->name ) . '</a>' );
 			}
 		?>
 	</div>
