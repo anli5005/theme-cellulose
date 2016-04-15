@@ -10470,6 +10470,33 @@ function brightness( rgb ) {
     $( 'body.masonry > .main' ).masonry( 'layout' );
   }
 
+  function paginateTabs() {
+    var $nav = $( '.site-navigation > ul li' );
+    var paginationAdded = $nav.eq( 0 ).find( 'i.material-icons' ).length > 0;
+    var width = 0;
+    for (var i = 0; i < $nav.length; i++) {
+      width += $nav.eq( i ).outerWidth();
+    }
+    if ( width > $( '.site-navigation' ).innerWidth() ) {
+      console.log("Moo");
+      if ( !paginationAdded ) {
+        var $left  = $( '<li><i class="material-icons"></i></li>' ).css({position: 'absolute', top: 0, height: '100%', display: 'block'});
+        var $right = $left.clone();
+        $left.find( '.material-icons' ).text( 'chevron_left' ).end().click(function() {
+          $( this ).parent().scrollLeft( $( this ).parent().scrollLeft() - ( 0.5 * $( window ).width() ) );
+        }).css( 'left', 0 ).prependTo( $( 'body > header > nav > ul' ) );
+        $right.find( '.material-icons' ).text( 'chevron_right' ).end().click(function() {
+          $( this ).parent().scrollLeft( $( this ).parent().scrollLeft() + ( 0.5 * $( window ).width() ) );
+        }).css( 'right', 0 ).appendTo( $( 'body > header > nav > ul' ) );
+      }
+    } else {
+      if ( paginationAdded ) {
+        $nav.eq( $nav.length - 1 ).remove();
+        $nav.eq( 0 ).remove();
+      }
+    }
+  }
+
   $(function() {
     // Setup Materialize Side Navs
     $( '.sidebar-trigger[data-activates="cellulose-sidebar"]' ).attr( 'href', '#' );
@@ -10527,16 +10554,10 @@ function brightness( rgb ) {
       clipChips( chipSelector );
     });
 
-    // Paginate tabs
-    // TODO: Only show this when tabs overflow
-    var $left  = $( '<li><i class="material-icons"></i></li>' ).css({position: 'absolute', top: 0, height: '100%', display: 'block'});
-    var $right = $left.clone();
-    $left.find( '.material-icons' ).text( 'chevron_left' ).end().click(function() {
-      $( this ).parent().scrollLeft( $( this ).parent().scrollLeft() - ( 0.5 * $( window ).width() ) );
-    }).css( 'left', 0 ).prependTo( $( 'body > header > nav > ul' ) );
-    $right.find( '.material-icons' ).text( 'chevron_right' ).end().click(function() {
-      $( this ).parent().scrollLeft( $( this ).parent().scrollLeft() + ( 0.5 * $( window ).width() ) );
-    }).css( 'right', 0 ).appendTo( $( 'body > header > nav > ul' ) );
+    $( window ).resize(function() {
+      paginateTabs();
+    });
+    paginateTabs();
   });
 
   $( window ).load(function() {
