@@ -72,6 +72,17 @@ function cellulose_add_body_classes( $classes ) {
 	if ( empty( get_theme_mod( 'cellulose_truncate_taxonomies' ) ) ) {
 		$classes[] = 'chip-clipping-off';
 	}
+	if ( wp_nav_menu( array(
+
+	"theme_location" => "navigation",
+	"depth" => -1,
+	"container" => false,
+	"fallback_cb" => "",
+	'echo' => false
+
+	) ) == '') {
+		$classes[] = "empty-navigation";
+	}
 	return $classes;
 }
 

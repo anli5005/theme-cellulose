@@ -2319,10 +2319,30 @@ body.admin-bar .site-header {
     height: 56px;
     line-height: 56px;
   }
+
+  body.empty-navigation header.site-header > .site-navigation {
+    display: none;
+  }
+
+  body.empty-navigation header.site-header > a.sidebar-trigger {
+    top: 50%;
+  }
 }
 @media only screen and (orientation: portrait) and (max-width: 840px) {
+  body {
+    padding-top: 104px;
+  }
+
+  body.empty-navigation {
+    padding-top: 56px;
+  }
+
   .site-header {
     height: 104px;
+  }
+
+  body.empty-navigation header.site-header {
+    height: 56px;
   }
 
   .site-title {
@@ -2335,8 +2355,20 @@ body.admin-bar .site-header {
   }
 }
 @media only screen and (orientation: landscape) and (max-width: 960px) {
+  body {
+    padding-top: 96px;
+  }
+
+  body.empty-navigation {
+    padding-top: 48px;
+  }
+
   .site-header {
     height: 96px;
+  }
+
+  body.empty-navigation header.site-header {
+    height: 48px;
   }
 
   .site-title {
@@ -2739,6 +2771,10 @@ a#sidenav-overlay {
 #cellulose-sidebar:target + a#sidenav-overlay {
   display: block;
   opacity: 1;
+}
+
+body.admin-bar #cellulose-sidebar {
+  padding-top: 32px;
 }
 
 .page-footer .widget {

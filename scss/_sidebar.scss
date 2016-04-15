@@ -48,4 +48,6 @@ a#sidenav-overlay {
   }
 }
 
-// TODO: Hide sidebar button when empty
+body.admin-bar #cellulose-sidebar {
+  padding-top: 32px;
+}
