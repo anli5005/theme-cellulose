@@ -49,6 +49,19 @@
 	  height: 100%;
 	}
   }
+  .current-menu-item {
+    position: relative;
+    &::after {
+      display: block;
+      content: "";
+      width: 100%;
+      background-color: $secondary-color;
+      height: 3px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
 }
 
 .site-navigation {

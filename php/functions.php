@@ -26,7 +26,7 @@ function cellulose_esc_color( $color ) {
 }
 
 function cellulose_verify_accent_color( $color ) {
-	return array_key_exists( $color, cellulose_accent_colors );
+	return array_key_exists( $color, cellulose_accent_colors() );
 }
 
 function cellulose_esc_accent_color( $color ) {
@@ -335,6 +335,10 @@ function cellulose_customize_css() {
 		color: <?php echo( cellulose_rgb_brightness( cellulose_hex_to_rgb( get_theme_mod( 'cellulose_primary_color' ) ) ) > $light_threshold ? 'black' : 'white' ); ?>;
 	}
 
+	blockquote {
+		border-color: <?php echo( get_theme_mod( 'cellulose_primary_color' ) ); ?>;
+	}
+
 	a,
 	.comments-list li.comment .comment-metadata .comment-edit-link {
 		color: <?php echo( $accent_color[3] ); ?>;
@@ -358,7 +362,8 @@ function cellulose_customize_css() {
 	.btn:hover,
 	.btn-floating:hover,
 	.btn-large:hover,
-	.entry-comments .submit:hover {
+	.entry-comments .submit:hover,
+	.site-navigation > ul > li.current-menu-item::after {
 		background-color: <?php echo( $accent_color[1] ); ?>;
 	}
 	</style>
