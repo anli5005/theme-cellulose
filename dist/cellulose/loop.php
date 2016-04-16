@@ -28,6 +28,18 @@ if ( have_posts() ):
 						<?php is_singular() ? ( the_content() || wp_link_pages() ) : the_excerpt(); // TODO: Beautify wp_link_pages output ?>
 					</div>
 				</div>
+				<?php if ( is_single() && ( ! empty( get_theme_mod( 'cellulose_enable_author_biographies' ) ) ) && get_the_author_meta( 'description' ) != '' ): ?>
+					<div class="entry-author-bio">
+						<h3>
+							<?php echo( get_avatar( get_the_author_meta( 'ID' ), 48, get_option( 'avatar_default', 'mystery' ), '', array(
+								'class' => 'circle entry-avatar'
+							) ) ); ?>
+							<?php the_author(); ?>
+						</h3>
+						<div><?php the_author_meta( 'description' ); ?></div>
+						<p><a class="btn-flat waves-effect">Read more by <?php the_author(); ?> <span class="material-icons">arrow_forward</span></a></p>
+					</div>
+				<?php endif; ?>
 				<?php comments_template(); ?>
 			</article>
 		<?php endwhile; ?>

@@ -110,6 +110,7 @@ header.entry-details .entry-taxonomies {
 }
 
 .entry-content,
+.entry-author,
 .entry-comments {
 	clear: both;
 	word-wrap: break-word;
@@ -122,10 +123,48 @@ header.entry-details .entry-taxonomies {
 	height: auto;
 }
 
+.entry-author-bio,
 .entry-comments {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
-  background-color: #F5F5F5;
   padding: 20px;
+}
+
+.entry-author-bio {
+  background-color: #FAFAFA;
+}
+
+.entry-author-bio > h3 {
+  height: 3rem;
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.entry-author-bio .entry-avatar {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 1rem;
+  vertical-align: middle;
+}
+
+.entry-author-bio > p .btn-flat {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+
+  .material-icons {
+    font-size: 1em;
+  }
+}
+
+article.card div.entry-author-bio > p {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.entry-comments {
+  background-color: #F5F5F5;
 }
 
 .entry-comments .submit {

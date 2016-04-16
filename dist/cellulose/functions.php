@@ -315,6 +315,17 @@ function cellulose_customize_register( $wp_customize ) {
 		'settings' => 'cellulose_use_grid_layout',
 		'section'  => 'cellulose_layout_settings'
 	) ) );
+	$wp_customize->add_setting( 'cellulose_enable_author_biographies', array(
+		'default' => '1',
+		'transport' => $default_transport,
+		'sanitize_callback' => 'esc_attr'
+	) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'cellulose_enable_author_biographies', array(
+		'label'    => __( 'Enable author biographies', 'cellulose' ),
+		'type'     => 'checkbox',
+		'settings' => 'cellulose_enable_author_biographies',
+		'section'  => 'cellulose_layout_settings'
+	) ) );
 }
 
 function cellulose_customize_css() {
