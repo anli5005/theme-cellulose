@@ -293,4 +293,13 @@ body.cellulose-full-width > footer {
   margin-top: 0;
 }
 
+.entry-content ul.pagination.post-pagination {
+  padding-left: 0;
+
+  li:first-child,
+  .active {
+    vertical-align: middle;
+  }
+}
+
 /* NEWLINE */

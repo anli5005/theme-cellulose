@@ -355,6 +355,16 @@ function cellulose_customize_css() {
 		color: <?php echo( $accent_color[3] ); ?>;
 	}
 
+	input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]),
+	input[type=email]:focus:not([readonly]), input[type=number]:focus:not([readonly]),
+	input[type=password]:focus:not([readonly]), input[type=search]:focus:not([readonly]),
+	input[type=tel]:focus:not([readonly]), input[type=text]:focus:not([readonly]),
+	input[type=time]:focus:not([readonly]), input[type=url]:focus:not([readonly]),
+	textarea.materialize-textarea:focus:not([readonly]) {
+	    border-color: <?php echo( $accent_color[3] ); ?>;
+	    box-shadow: 0 1px 0 0 <?php echo( $accent_color[3] ); ?>;
+	}
+
 	.btn,
 	.btn-floating,
 	.btn-floating i,

@@ -25,7 +25,22 @@ if ( have_posts() ):
 					<?php get_template_part( "entry-details" ); ?>
 					</header>
 					<div class="entry-content">
-						<?php is_singular() ? ( the_content() || wp_link_pages() ) : the_excerpt(); // TODO: Beautify wp_link_pages output ?>
+						<?php
+						if ( is_singular() ) {
+							the_content();
+							$pagination = wp_link_pages( array(
+								'before' => '<ul class="pagination post-pagination"><li>Pages:</li>',
+								'after' => '</ul>',
+								'echo' => '0',
+								'separator' => ''
+							) );
+							$pagination = preg_replace( '/<a([^>]*)>([0-9]+)<\\/a>/', '<li class="waves-effect"><a\\1>\\2</a></li>', $pagination );
+							$pagination = preg_replace( '/> *([0-9]+) *<(\\/[^a]|[^\\/])/', '><li class="active">\\1</li><\\2', $pagination );
+							echo( $pagination );
+						} else {
+							the_excerpt();
+						}
+						?>
 					</div>
 				</div>
 				<?php if ( is_single() && ( ! empty( get_theme_mod( 'cellulose_enable_author_biographies' ) ) ) && get_the_author_meta( 'description' ) != '' ): ?>
