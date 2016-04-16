@@ -113,6 +113,11 @@ function cellulose_add_theme_support() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
+	add_theme_support( 'custom-logo', array(
+		'height' => 168,
+		'flex-height' => false,
+		'flex-width' => true
+	) );
 }
 
 function cellulose_add_pagination_button_classes() {
@@ -283,18 +288,6 @@ function cellulose_customize_register( $wp_customize ) {
 		)
 	) ) );
 
-	// Logo
-	$wp_customize->add_setting( 'cellulose_header_logo', array(
-		'default' => '',
-		'transport' => $default_transport,
-		'sanitize_callback' => 'esc_url_raw'
-	) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'cellulose_header_logo', array(
-		'label'    => __( 'Logo', 'cellulose' ),
-		'settings' => 'cellulose_header_logo',
-		'section'  => 'title_tagline'
-	) ) );
-
 	// Layout
 	$wp_customize->add_section( 'cellulose_layout_settings',  array(
 		'title'    => __( 'Layout', 'cellulose' ),
@@ -368,19 +361,6 @@ function cellulose_customize_css() {
 	.entry-comments .submit:hover {
 		background-color: <?php echo( $accent_color[1] ); ?>;
 	}
-
-	<?php if ( ! empty( get_theme_mod( 'cellulose_header_logo' ) ) ): ?>
-	.site-title a {
-		color: transparent;
-		background-color: transparent;
-		background-image: url('<?php echo( get_theme_mod( 'cellulose_header_logo' ) ); ?>');
-		background-repeat: no-repeat;
-		background-size: contain;
-		width: 100%;
-		height: 100%;
-		display: block;
-	}
-	<?php endif; ?>
 	</style>
 <?php }
 

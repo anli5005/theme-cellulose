@@ -15,9 +15,15 @@
 			<?php endif; ?>
 
 			<<?php echo( is_front_page() ? 'h1' : 'p' ); ?> class="site-title">
-				<a href="<?php echo( esc_url( home_url( '/', 'relative' ) ) ); ?>">
-					<?php echo( esc_html( get_bloginfo( "name" ) ) ); ?>
-				</a>
+				<?php
+					if ( has_custom_logo() ):
+						the_custom_logo();
+					else: ?>
+						<a href="<?php echo( esc_url( home_url( '/', 'relative' ) ) ); ?>">
+							<?php echo( esc_html( get_bloginfo( "name" ) ) ); ?>
+						</a>
+					<?php endif;
+				?>
 			</<?php echo( is_front_page() ? 'h1' : 'p' ); ?>>
 
 			<nav class="site-navigation hide-tab-scrollbar">
